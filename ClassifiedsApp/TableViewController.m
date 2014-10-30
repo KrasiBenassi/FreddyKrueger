@@ -71,14 +71,13 @@
     return cell;
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([[segue identifier] isEqualToString:@"ShowDetails"]){
-        DetailViewController *detailViewController = [segue destinationViewController];
-        
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"ShowDetails"]) {
+        DetailViewController *detailviewcontroller = [segue destinationViewController];
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         
         long row = [myIndexPath row];
-        //detailViewController.detailModal = @[_Titles[row], _Descriptions[row], _Images[row]];
+        detailviewcontroller.detailModal = @[_Titles[row],_Descriptions[row],_Images[row]];
     }
 }
 

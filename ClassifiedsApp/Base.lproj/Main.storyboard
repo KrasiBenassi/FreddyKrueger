@@ -86,6 +86,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="reD-cl-or9">
+                                <rect key="frame" x="16" y="338" width="568" height="249"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7A7-tY-nkL">
+                                <rect key="frame" x="100" y="72" width="400" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="1l8-4Z-6wZ"/>
+                                    <constraint firstAttribute="width" constant="400" id="qtt-ty-5q7"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tnv-J2-wTg">
                                 <rect key="frame" x="16" y="294" width="568" height="36"/>
                                 <constraints>
@@ -95,25 +109,11 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="reD-cl-or9">
-                                <rect key="frame" x="48" y="320" width="568" height="249"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7A7-tY-nkL">
-                                <rect key="frame" x="120" y="72" width="400" height="200"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="1l8-4Z-6wZ"/>
-                                    <constraint firstAttribute="width" constant="400" id="qtt-ty-5q7"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4RF-j8-43A" firstAttribute="top" secondItem="reD-cl-or9" secondAttribute="bottom" constant="13" id="BDn-Fb-zIa"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="7A7-tY-nkL" secondAttribute="trailing" constant="61" id="SCN-Zk-VTK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7A7-tY-nkL" secondAttribute="trailing" constant="60" id="SCN-Zk-VTK"/>
                             <constraint firstItem="7A7-tY-nkL" firstAttribute="top" secondItem="2Jk-bZ-fNa" secondAttribute="bottom" constant="8" symbolic="YES" id="Tuh-Vv-JQ0"/>
                             <constraint firstItem="Tnv-J2-wTg" firstAttribute="trailing" secondItem="fvy-de-cl8" secondAttribute="trailingMargin" id="Xxm-QN-0Mx"/>
                             <constraint firstItem="Tnv-J2-wTg" firstAttribute="trailing" secondItem="reD-cl-or9" secondAttribute="trailing" id="bqa-gA-0bg"/>
@@ -127,7 +127,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vT-Qf-UPT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1877" y="336"/>
+            <point key="canvasLocation" x="1861" y="336"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tqD-O9-MD0">
