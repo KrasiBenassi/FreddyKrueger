@@ -8,6 +8,7 @@
 
 #import "TableViewController.h"
 #import "TableCell.h"
+#import "DetailViewController.h"
 
 @interface TableViewController ()
 
@@ -67,8 +68,18 @@
     cell.lblDescription.text = _Descriptions[row];
     cell.thumbImage.image = [UIImage imageNamed:_Images[row]];
     
-    
     return cell;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([[segue identifier] isEqualToString:@"ShowDetails"]){
+        DetailViewController *detailViewController = [segue destinationViewController];
+        
+        NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
+        
+        long row = [myIndexPath row];
+        //detailViewController.detailModal = @[_Titles[row], _Descriptions[row], _Images[row]];
+    }
 }
 
 /*
