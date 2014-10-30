@@ -11,7 +11,7 @@
 @interface DetailViewController : UIViewController
 
 @property (strong, nonatomic)IBOutlet UILabel *lblTitle;
-@property (strong, nonatomic)IBOutlet UITextField *lblDescription;
+@property (strong, nonatomic)IBOutlet UILabel *lblDescription;
 @property (strong, nonatomic)IBOutlet UIImageView *imageView;
 
 @property (strong, nonatomic)NSArray *detailModal;
