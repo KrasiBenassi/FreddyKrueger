@@ -61,7 +61,7 @@
     TableCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    int row = [indexPath row];
+    long row = [indexPath row];
     
     cell.lblTitle.text = _Titles[row];
     cell.lblDescription.text = _Descriptions[row];
