@@ -69,11 +69,123 @@
                             <outlet property="delegate" destination="V23-tf-g1Z" id="3BN-qV-29J"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Classifieds" id="N1k-1I-Ubu"/>
+                    <navigationItem key="navigationItem" title="Classifieds" id="N1k-1I-Ubu">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="DIb-5z-uAj">
+                            <connections>
+                                <segue destination="5fq-Vs-oId" kind="show" id="QL2-E7-exV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="StV-b1-XQk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1107" y="336"/>
+            <point key="canvasLocation" x="1171" y="18"/>
+        </scene>
+        <!--Add Classified-->
+        <scene sceneID="0C4-Is-geB">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L0T-sM-fqX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController title="Add Classified" id="5fq-Vs-oId" customClass="AddClassifiedViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Jex-gV-w3J"/>
+                        <viewControllerLayoutGuide type="bottom" id="ykV-nr-ng6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3lp-zn-bRH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JUw-KN-kfK">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="ohE-pD-nez"/>
+                                </constraints>
+                                <attributedString key="attributedText"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jZ-Pg-26q">
+                                <rect key="frame" x="16" y="72" width="568" height="508"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sRH-wS-VOM">
+                                        <rect key="frame" x="0.0" y="6" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="42" id="YIx-f5-dBx"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ian-PW-d1h">
+                                        <rect key="frame" x="0.0" y="80" width="116" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="116" id="POb-ig-LPG"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AOp-vS-GBQ">
+                                        <rect key="frame" x="0.0" y="35" width="568" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFP-W4-N6z">
+                                        <rect key="frame" x="0.0" y="236" width="119" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="119" id="2VJ-7P-n3T"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                        <state key="normal" title="Take a picture"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xkh-Qs-m6X">
+                                        <rect key="frame" x="127" y="236" width="158" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="158" id="rwo-md-yBf"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                        <state key="normal" title="Choose from phone"/>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FIb-WQ-pcb">
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dzX-eN-Day">
+                                        <rect key="frame" x="0.0" y="116" width="568" height="112"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PbD-47-osD">
+                                        <rect key="frame" x="213" y="1" width="79" height="32"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="240" verticalCompressionResistancePriority="130" fixedFrame="YES" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="130" image="city6.png" translatesAutoresizingMaskIntoConstraints="NO" id="hKQ-VZ-pUc">
+                                        <rect key="frame" x="0.0" y="288" width="240" height="130"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="dzX-eN-Day" secondAttribute="trailing" id="Hhk-3y-gFl"/>
+                                    <constraint firstItem="dzX-eN-Day" firstAttribute="leading" secondItem="5jZ-Pg-26q" secondAttribute="leading" id="bPt-0o-eoV"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PbD-47-osD" secondAttribute="trailing" constant="244" id="w2O-4f-d37"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="JUw-KN-kfK" firstAttribute="leading" secondItem="3lp-zn-bRH" secondAttribute="leading" id="1Fj-Xb-kZH"/>
+                            <constraint firstItem="5jZ-Pg-26q" firstAttribute="trailing" secondItem="3lp-zn-bRH" secondAttribute="trailingMargin" id="2f4-ks-53C"/>
+                            <constraint firstItem="5jZ-Pg-26q" firstAttribute="leading" secondItem="3lp-zn-bRH" secondAttribute="leadingMargin" id="lQb-je-cHa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="scroller" destination="5jZ-Pg-26q" id="oO1-JF-daB"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1171" y="750"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="yBF-1s-YTy">
@@ -132,7 +244,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vT-Qf-UPT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1861" y="336"/>
+            <point key="canvasLocation" x="1925" y="18"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tqD-O9-MD0">
@@ -158,7 +270,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXN-tc-DbU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="295" y="336"/>
+            <point key="canvasLocation" x="359" y="18"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="city6.png" width="761" height="120"/>
+    </resources>
 </document>
