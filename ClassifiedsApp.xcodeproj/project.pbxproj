@@ -20,6 +20,8 @@
 		84A04D581A01CF48007CC73D /* djanta.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84A04D551A01CF48007CC73D /* djanta.jpg */; };
 		84A04D591A01CF48007CC73D /* please.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84A04D561A01CF48007CC73D /* please.jpg */; };
 		84A04D5C1A01D187007CC73D /* TableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A04D5B1A01D187007CC73D /* TableCell.m */; };
+		84A1AC231A032567005CE5FF /* TableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A1AC221A032567005CE5FF /* TableHeaderView.m */; };
+		84A1AC291A033827005CE5FF /* city6.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A1AC281A033827005CE5FF /* city6.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +56,9 @@
 		84A04D561A01CF48007CC73D /* please.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = please.jpg; sourceTree = "<group>"; };
 		84A04D5A1A01D187007CC73D /* TableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableCell.h; sourceTree = "<group>"; };
 		84A04D5B1A01D187007CC73D /* TableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableCell.m; sourceTree = "<group>"; };
+		84A1AC211A032567005CE5FF /* TableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableHeaderView.h; sourceTree = "<group>"; };
+		84A1AC221A032567005CE5FF /* TableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableHeaderView.m; sourceTree = "<group>"; };
+		84A1AC281A033827005CE5FF /* city6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = city6.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,13 +105,15 @@
 				84A02E7B1A02B6AC00894992 /* DetailViewController.h */,
 				84A02E7C1A02B6AC00894992 /* DetailViewController.m */,
 				84A04D341A01BDE1007CC73D /* Main.storyboard */,
-				84A04D501A01C251007CC73D /* TableViewController.h */,
-				84A04D511A01C251007CC73D /* TableViewController.m */,
 				84A04D5A1A01D187007CC73D /* TableCell.h */,
 				84A04D5B1A01D187007CC73D /* TableCell.m */,
+				84A04D501A01C251007CC73D /* TableViewController.h */,
+				84A04D511A01C251007CC73D /* TableViewController.m */,
 				84A04D371A01BDE1007CC73D /* Images.xcassets */,
 				84A04D391A01BDE1007CC73D /* LaunchScreen.xib */,
 				84A04D2E1A01BDE1007CC73D /* ClassifiedsApp.xcdatamodeld */,
+				84A1AC211A032567005CE5FF /* TableHeaderView.h */,
+				84A1AC221A032567005CE5FF /* TableHeaderView.m */,
 				84A04D271A01BDE1007CC73D /* Supporting Files */,
 			);
 			path = ClassifiedsApp;
@@ -142,6 +149,7 @@
 		84A04D531A01CF48007CC73D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				84A1AC281A033827005CE5FF /* city6.png */,
 				84A04D541A01CF48007CC73D /* chetka.jpg */,
 				84A04D551A01CF48007CC73D /* djanta.jpg */,
 				84A04D561A01CF48007CC73D /* please.jpg */,
@@ -232,6 +240,7 @@
 				84A04D361A01BDE1007CC73D /* Main.storyboard in Resources */,
 				84A04D591A01CF48007CC73D /* please.jpg in Resources */,
 				84A04D571A01CF48007CC73D /* chetka.jpg in Resources */,
+				84A1AC291A033827005CE5FF /* city6.png in Resources */,
 				84A04D581A01CF48007CC73D /* djanta.jpg in Resources */,
 				84A04D3B1A01BDE1007CC73D /* LaunchScreen.xib in Resources */,
 				84A04D381A01BDE1007CC73D /* Images.xcassets in Resources */,
@@ -253,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84A04D2D1A01BDE1007CC73D /* AppDelegate.m in Sources */,
+				84A1AC231A032567005CE5FF /* TableHeaderView.m in Sources */,
 				84A04D5C1A01D187007CC73D /* TableCell.m in Sources */,
 				84A04D2A1A01BDE1007CC73D /* main.m in Sources */,
 				84A04D301A01BDE1007CC73D /* ClassifiedsApp.xcdatamodeld in Sources */,
