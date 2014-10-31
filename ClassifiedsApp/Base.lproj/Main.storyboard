@@ -159,6 +159,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="Take a picture"/>
+                                        <connections>
+                                            <action selector="takePhoto:" destination="5fq-Vs-oId" eventType="touchUpInside" id="wXi-uh-N3o"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xkh-Qs-m6X">
                                         <rect key="frame" x="410" y="236" width="158" height="30"/>
@@ -167,6 +170,9 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="Choose from phone"/>
+                                        <connections>
+                                            <action selector="selectPhoto:" destination="5fq-Vs-oId" eventType="touchUpInside" id="Sqw-t3-HHv"/>
+                                        </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FIb-WQ-pcb">
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -258,6 +264,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="imageView" destination="WfZ-uH-var" id="Nle-RN-Uax"/>
                         <outlet property="scroller" destination="5jZ-Pg-26q" id="oO1-JF-daB"/>
                     </connections>
                 </viewController>

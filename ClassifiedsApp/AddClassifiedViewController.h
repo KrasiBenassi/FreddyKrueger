@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddClassifiedViewController : UIViewController
+@interface AddClassifiedViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (strong, nonatomic) IBOutlet UIImageView *imageView;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scroller;
 
+- (IBAction)takePhoto:(UIButton *)sender;
+- (IBAction)selectPhoto:(UIButton *)sender;
 
 @end
