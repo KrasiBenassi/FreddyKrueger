@@ -46,6 +46,10 @@
                 @"please.jpg",
                 @"djanta.jpg"];
     
+    _Prices = @[@"1200",
+                @"122",
+                @"332"];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,6 +80,7 @@
     cell.lblTitle.text = _Titles[row];
     cell.lblDescription.text = _Descriptions[row];
     cell.thumbImage.image = [UIImage imageNamed:_Images[row]];
+    cell.price.text = _Prices[row];
     
     return cell;
 }

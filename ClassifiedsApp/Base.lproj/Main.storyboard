@@ -55,6 +55,13 @@
                                             </attributedString>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1500" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PlW-85-Zkc">
+                                            <rect key="frame" x="116" y="76" width="42" height="21"/>
+                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="8b8-wC-uTY" secondAttribute="trailing" constant="-22" id="BkY-an-JVx"/>
@@ -73,6 +80,7 @@
                                 <connections>
                                     <outlet property="lblDescription" destination="7tU-MR-dpe" id="oj7-t0-MtV"/>
                                     <outlet property="lblTitle" destination="8b8-wC-uTY" id="rQM-Ls-Fmu"/>
+                                    <outlet property="price" destination="PlW-85-Zkc" id="8aa-sG-a0p"/>
                                     <outlet property="thumbImage" destination="wx0-Ya-83l" id="nrx-2J-XUG"/>
                                     <segue destination="XCg-Fz-GCk" kind="show" identifier="ShowDetails" id="xpC-6z-zeb"/>
                                 </connections>

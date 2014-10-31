@@ -14,6 +14,7 @@
 @property (strong, nonatomic)IBOutlet UILabel *lblDescription;
 @property (strong, nonatomic)IBOutlet UIImageView *imageView;
 
+
 @property (strong, nonatomic)NSArray *detailModal;
 
 @end

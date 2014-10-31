@@ -13,5 +13,6 @@
 @property (nonatomic, strong)NSArray *Images;
 @property (nonatomic, strong)NSArray *Titles;
 @property (nonatomic, strong)NSArray *Descriptions;
+@property (nonatomic, strong)NSArray *Prices;
 
 @end
