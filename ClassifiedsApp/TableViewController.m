@@ -35,6 +35,8 @@
     
     self.tableView.tableHeaderView = [[TableHeaderView alloc] initWithText:@"Classifieds"];
     
+    PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
+
     _Titles = @[@"Prodavam si chetkata za zabi",
                 @"Tarsq si kvartira",
                 @"Prodavam si letnite djanti."];

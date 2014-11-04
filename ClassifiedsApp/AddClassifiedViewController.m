@@ -79,8 +79,24 @@
     
 }
 
-- (NSString *)base64String {
-    return [UIImageJPEGRepresentation(_imageView.image, 0.1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+- (PFFile *)base64String {
+    //return [UIImageJPEGRepresentation(_imageView.image, 0.1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    //NSString *imgName = [_imageView image].accessibilityIdentifier;
+    NSDateFormatter *formatter;
+    NSString        *dateString;
+    NSMutableString *imageName;
+    
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"dd-MM-yyyy-HH-mm-ss"];
+    
+    dateString = [formatter stringFromDate:[NSDate date]];
+    imageName = [NSMutableString stringWithString:dateString];
+    [imageName appendString:@".jpg"];
+    
+    NSData *imageData = UIImageJPEGRepresentation(_imageView.image, 0.1);
+    PFFile *imageFile = [PFFile fileWithName:imageName data:imageData];
+    
+    return imageFile;
 }
 
 - (IBAction)saveClassified:(UIButton *)sender {
