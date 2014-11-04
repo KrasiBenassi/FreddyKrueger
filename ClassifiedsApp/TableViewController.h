@@ -10,9 +10,11 @@
 
 @interface TableViewController : UITableViewController
 
-@property (nonatomic, strong)NSArray *Images;
-@property (nonatomic, strong)NSArray *Titles;
-@property (nonatomic, strong)NSArray *Descriptions;
-@property (nonatomic, strong)NSArray *Prices;
+@property (nonatomic, strong)NSMutableArray *Images;
+@property (nonatomic, strong)NSMutableArray *Titles;
+@property (nonatomic, strong)NSMutableArray *Descriptions;
+@property (nonatomic, strong)NSMutableArray *Prices;
+
+@property (nonatomic, strong)NSMutableArray *ClassifiedsArr;
 
 @end

@@ -80,8 +80,6 @@
 }
 
 - (PFFile *)base64String {
-    //return [UIImageJPEGRepresentation(_imageView.image, 0.1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    //NSString *imgName = [_imageView image].accessibilityIdentifier;
     NSDateFormatter *formatter;
     NSString        *dateString;
     NSMutableString *imageName;
@@ -104,7 +102,8 @@
     NSString *description = _txtDescription.text;
     NSString *address = _txtAddress.text;
     NSString *phone = _txtPhone.text;
-    NSString *name = _txtName.text;//
+    NSString *name = _txtName.text;
+    NSString *price = _txtPrice.text;
     
     PFObject *classified = [PFObject objectWithClassName:@"Classifieds"];
     classified[@"Title"] = title;
@@ -112,6 +111,7 @@
     classified[@"Address"] = address;
     classified[@"Phone"] = phone;
     classified[@"Name"] = name;
+    classified[@"Price"] = price;
     //[classified setObject:_imageView.image forKey:@"Image"];
     classified[@"Picture"] = self.base64String;
     [classified saveInBackground];
