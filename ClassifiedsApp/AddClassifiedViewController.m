@@ -7,6 +7,7 @@
 //
 
 #import "AddClassifiedViewController.h"
+#import <Parse/Parse.h>
 
 @interface AddClassifiedViewController ()
 
@@ -78,6 +79,28 @@
     
 }
 
+- (NSString *)base64String {
+    return [UIImageJPEGRepresentation(_imageView.image, 0.1) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+}
+
+- (IBAction)saveClassified:(UIButton *)sender {
+    NSString *title = _txtTitle.text;
+    NSString *description = _txtDescription.text;
+    NSString *address = _txtAddress.text;
+    NSString *phone = _txtPhone.text;
+    NSString *name = _txtName.text;//
+    
+    PFObject *classified = [PFObject objectWithClassName:@"Classifieds"];
+    classified[@"Title"] = title;
+    classified[@"Description"] = description;
+    classified[@"Address"] = address;
+    classified[@"Phone"] = phone;
+    classified[@"Name"] = name;
+    //[classified setObject:_imageView.image forKey:@"Image"];
+    classified[@"Picture"] = self.base64String;
+    [classified saveInBackground];
+}
+
 #pragma mark - Image Picker Controller delegate methods
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
@@ -94,5 +117,4 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
     
 }
-
 @end

@@ -10,6 +10,7 @@
 #import "TableCell.h"
 #import "DetailViewController.h"
 #import "TableHeaderView.h"
+#import <Parse/Parse.h>
 
 @interface TableViewController ()
 
