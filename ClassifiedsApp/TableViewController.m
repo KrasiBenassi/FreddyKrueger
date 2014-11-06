@@ -124,13 +124,18 @@
     NSMutableDictionary *arr = [[NSMutableDictionary alloc] init];
     arr[@"Title"] = _ClassifiedsArr[row][@"Title"];
     arr[@"Description"] = _ClassifiedsArr[row][@"Description"];
+    arr[@"Phone"] = _ClassifiedsArr[row][@"Phone"];
+    arr[@"Name"] = _ClassifiedsArr[row][@"Name"];
+    arr[@"Address"] = _ClassifiedsArr[row][@"Address"];
     arr[@"Picture"] = dataImage;
     
     if([[_ClassifiedsArr[row] allKeys] containsObject:@"Price"])
     {
         arr[@"Price"] = _ClassifiedsArr[row][@"Price"];
     }
-    
+    else{
+        arr[@"Price"] = @"";
+    }
     [_ClassifiedsInfo addObject: arr];
     
     return cell;

@@ -20,6 +20,10 @@
     _lblTitle.text = _detailModal[0][@"Title"];
     _lblDescription.text = _detailModal[0][@"Description"];
     _imageView.image = [UIImage imageWithData:_detailModal[0][@"Picture"]];
+    _lblPrice.text = _detailModal[0][@"Price"];
+    _lblPhone.text = _detailModal[0][@"Phone"];
+    _lblName.text = _detailModal[0][@"Name"];
+    _lblLocation.text = _detailModal[0][@"Address"];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Striped_Tranquil.jpg"]];
     self.navigationItem.title = _detailModal[0][@"Title"];
