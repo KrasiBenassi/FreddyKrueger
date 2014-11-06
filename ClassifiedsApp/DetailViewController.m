@@ -17,11 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      //Do any additional setup after loading the view..
-    _lblTitle.text = _detailModal[0];
-    _lblDescription.text = _detailModal[1];
-    _imageView.image = [UIImage imageNamed:_detailModal[2]];
+    _lblTitle.text = _detailModal[0][@"Title"];
+    _lblDescription.text = _detailModal[0][@"Description"];
+    _imageView.image = [UIImage imageWithData:_detailModal[0][@"Picture"]];
     
-    self.navigationItem.title = _detailModal[0];
+    self.navigationItem.title = _detailModal[0][@"Title"];
 }
 
 - (void)didReceiveMemoryWarning {

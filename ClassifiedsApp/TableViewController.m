@@ -35,43 +35,20 @@
     
     self.tableView.tableHeaderView = [[TableHeaderView alloc] initWithText:@"Classifieds"];
     
-//    NSMutableArray *TITLE = [[NSMutableArray alloc ] init];
-//    NSMutableArray *DESCRIPTION = [[NSMutableArray alloc ] init];
-//    NSMutableArray *ADDRESS = [[NSMutableArray alloc ] init];
-//    NSMutableArray *NAME = [[NSMutableArray alloc ] init];
-//    NSMutableArray *PHONE = [[NSMutableArray alloc ] init];
-//    NSMutableArray *PRICE = [[NSMutableArray alloc ] init];
     _ClassifiedsArr = [[NSMutableArray alloc] init];
+    _ClassifiedsInfo = [[NSMutableArray alloc] init];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             [_ClassifiedsArr addObjectsFromArray:objects];
+            [self.tableView reloadData];
             NSLog(@"SUCCESS");
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-
-//    _Titles = @[@"Prodavam si chetkata za zabi",
-//                @"Tarsq si kvartira",
-//                @"Prodavam si letnite djanti."];
-//    
-//    _Descriptions = @[@"Mnogo zapzazena. Pochti ne e polzvana",
-//                      @"Do 100 leva. Po vazmojnost tristaen",
-//                      @"Jelezni djanti. Kupih gi tova lqto. :)"];
-//    
-    _Images = @[@"chetka.jpg",
-                @"please.jpg",
-                @"djanta.jpg",
-                @"djanta.jpg",
-                @"djanta.jpg"];
-//
-//    _Prices = @[@"1200",
-//                @"122",
-//                @"332"];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -100,16 +77,21 @@
     long row = [indexPath row];
     
     PFFile *userImageFile = _ClassifiedsArr[row][@"Picture"];
+    
+    NSData *dataImage = [userImageFile getData];
+    
     [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
         if (!error) {
             cell.thumbImage.image = [UIImage imageWithData:imageData];
-        }
+            }
     }];
     
     cell.lblTitle.text = _ClassifiedsArr[row][@"Title"];
     cell.lblDescription.text = _ClassifiedsArr[row][@"Description"];
-   // cell.thumbImage.image = [UIImage imageNamed:_ClassifiedsArr[row][@"Picture"]];
     cell.price.text = _ClassifiedsArr[row][@"Price"];
+    
+    [_ClassifiedsInfo addObject:_ClassifiedsArr[row]];
+    _ClassifiedsInfo[row][@"Picture"] = dataImage;
     
     return cell;
 }
@@ -120,7 +102,7 @@
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         
         long row = [myIndexPath row];
-        detailviewcontroller.detailModal = @[_ClassifiedsArr[row][@"Title"],_ClassifiedsArr[row][@"Description"],_ClassifiedsArr[row][@"Picture"]];
+        detailviewcontroller.detailModal = [NSArray arrayWithObjects: _ClassifiedsArr[row], nil];
     }
 }
 

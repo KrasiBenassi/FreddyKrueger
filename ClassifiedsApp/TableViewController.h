@@ -16,5 +16,6 @@
 @property (nonatomic, strong)NSMutableArray *Prices;
 
 @property (nonatomic, strong)NSMutableArray *ClassifiedsArr;
+@property (nonatomic, strong)NSMutableArray *ClassifiedsInfo;
 
 @end
