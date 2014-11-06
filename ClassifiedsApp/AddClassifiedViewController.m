@@ -43,6 +43,8 @@
         [myAlertView show];
     }
     
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Striped_Tranquil.jpg"]];
+    
     [scroller setScrollEnabled:YES];
     [scroller setContentSize:CGSizeMake(320, 1049)];
 }

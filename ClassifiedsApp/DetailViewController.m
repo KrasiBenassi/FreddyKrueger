@@ -21,6 +21,7 @@
     _lblDescription.text = _detailModal[0][@"Description"];
     _imageView.image = [UIImage imageWithData:_detailModal[0][@"Picture"]];
     
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Striped_Tranquil.jpg"]];
     self.navigationItem.title = _detailModal[0][@"Title"];
 }
 
