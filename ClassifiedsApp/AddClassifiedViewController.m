@@ -7,13 +7,16 @@
 //
 
 #import "AddClassifiedViewController.h"
+#import <CoreLocation/CoreLocation.h>
 #import <Parse/Parse.h>
 
-@interface AddClassifiedViewController ()
+@interface AddClassifiedViewController ()<CLLocationManagerDelegate>
 
 @end
 
-@implementation AddClassifiedViewController
+@implementation AddClassifiedViewController{
+    CLLocationManager *locationManager;
+}
 
 @synthesize scroller;
 
@@ -21,19 +24,49 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
+    locationManager.delegate = self;
+    locationManager.distanceFilter = kCLLocationAccuracyHundredMeters;
+    
+    [locationManager requestAlwaysAuthorization];
+    [locationManager startUpdatingLocation];
+    
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
         UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
                                                               message:@"Device has no camera"
                                                              delegate:nil
                                                     cancelButtonTitle:@"OK"
-                                                    otherButtonTitles: nil];
+                                                    otherButtonTitles: nil, nil];
         
         [myAlertView show];
     }
     
     [scroller setScrollEnabled:YES];
     [scroller setContentSize:CGSizeMake(320, 1049)];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    CLLocation *location = [locations lastObject];
+    CLGeocoder *coder = [[CLGeocoder alloc] init];
+    
+    [coder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        CLPlacemark *mark = [placemarks lastObject];
+        // NSLog(@"%@", mark.addressDictionary);
+        _txtAddress.text = mark.addressDictionary[@"City"];
+    }];
+    
+    [locationManager pausesLocationUpdatesAutomatically];
+}
+
+-(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    [[[UIAlertView alloc] initWithTitle:@"Location error"
+                                message:[NSString stringWithFormat:@"Error: %@", error]
+                               delegate:nil
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil, nil]
+     show];
 }
 
 - (void)didReceiveMemoryWarning {

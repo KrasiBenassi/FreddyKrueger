@@ -65,7 +65,37 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return _ClassifiedsArr.count;
+    
+    __block NSInteger clCount = _ClassifiedsArr.count;
+    
+//    PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
+//    [query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
+//        if (!error) {
+//            // The count request succeeded. Log the count
+//            NSInteger tempCount = (NSInteger) count;
+//            
+//            if(tempCount != clCount){
+//                clCount = tempCount;
+////                
+//                PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
+//                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//                    if (!error) {
+//                        [_ClassifiedsArr addObjectsFromArray:objects];
+//                        [self.tableView reloadData];
+//                        NSLog(@"SUCCESS");
+//                    } else {
+//                        // Log details of the failure
+//                        NSLog(@"Error: %@ %@", error, [error userInfo]);
+//                    }
+//                }];
+//            }
+//            
+//        } else {
+//            // The request failed
+//        }
+//    }];
+    
+    return clCount;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -11,5 +11,6 @@
 
 @interface TALocationProvider : NSObject
 
--(void)getLocationWithBlock:(void(^)(CLLocation *locationn)) block;
+    -(void)getLocationWithBlock:(void(^)(CLLocation *locationn)) block;
+
 @end
