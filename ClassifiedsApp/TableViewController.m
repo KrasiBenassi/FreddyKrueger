@@ -90,19 +90,28 @@
     cell.lblDescription.text = _ClassifiedsArr[row][@"Description"];
     cell.price.text = _ClassifiedsArr[row][@"Price"];
     
-    [_ClassifiedsInfo addObject:_ClassifiedsArr[row]];
-    _ClassifiedsInfo[row][@"Picture"] = dataImage;
+    NSMutableDictionary *arr = [[NSMutableDictionary alloc] init];
+    arr[@"Title"] = _ClassifiedsArr[row][@"Title"];
+    arr[@"Description"] = _ClassifiedsArr[row][@"Description"];
+    arr[@"Picture"] = dataImage;
+    
+    if([[_ClassifiedsArr[row] allKeys] containsObject:@"Price"])
+    {
+        arr[@"Price"] = _ClassifiedsArr[row][@"Price"];
+    }
+    
+    [_ClassifiedsInfo addObject: arr];
     
     return cell;
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"ShowDetails"]) {
-        DetailViewController *detailviewcontroller = [segue destinationViewController];
+        DetailViewController *detailViewController = [segue destinationViewController];
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         
         long row = [myIndexPath row];
-        detailviewcontroller.detailModal = [NSArray arrayWithObjects: _ClassifiedsArr[row], nil];
+        detailViewController.detailModal = [NSArray arrayWithObjects: _ClassifiedsInfo[row], nil];
     }
 }
 
