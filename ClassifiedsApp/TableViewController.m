@@ -67,34 +67,54 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     
-    __block NSInteger clCount = _ClassifiedsArr.count;
+    NSInteger clCount = _ClassifiedsArr.count;
     
-//    PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
-//    [query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
-//        if (!error) {
-//            // The count request succeeded. Log the count
-//            NSInteger tempCount = (NSInteger) count;
-//            
-//            if(tempCount != clCount){
-//                clCount = tempCount;
-////                
-//                PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
-//                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//                    if (!error) {
-//                        [_ClassifiedsArr addObjectsFromArray:objects];
-//                        [self.tableView reloadData];
-//                        NSLog(@"SUCCESS");
-//                    } else {
-//                        // Log details of the failure
-//                        NSLog(@"Error: %@ %@", error, [error userInfo]);
-//                    }
-//                }];
-//            }
-//            
-//        } else {
-//            // The request failed
-//        }
-//    }];
+    PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
+    long count = [query countObjects];
+    
+    if(count != clCount && clCount != 0){
+        //_ClassifiedsArr = nil;
+        NSMutableArray *csArr = [[NSMutableArray alloc] init];
+        PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                [csArr addObjectsFromArray:objects];
+                _ClassifiedsArr = csArr;
+                [self.tableView reloadData];
+                NSLog(@"SUCCESS");
+            } else {
+                // Log details of the failure
+                NSLog(@"Error: %@ %@", error, [error userInfo]);
+            }
+        }];
+    }
+    
+    //    PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
+    //    [query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
+    //        if (!error) {
+    //            // The count request succeeded. Log the count
+    //            NSInteger tempCount = (NSInteger) count;
+    //
+    //            if(tempCount != clCount){
+    //                clCount = tempCount;
+    ////
+    //                PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
+    //                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    //                    if (!error) {
+    //                        [_ClassifiedsArr addObjectsFromArray:objects];
+    //                        [self.tableView reloadData];
+    //                        NSLog(@"SUCCESS");
+    //                    } else {
+    //                        // Log details of the failure
+    //                        NSLog(@"Error: %@ %@", error, [error userInfo]);
+    //                    }
+    //                }];
+    //            }
+    //
+    //        } else {
+    //            // The request failed
+    //        }
+    //    }];
     
     return clCount;
 }
