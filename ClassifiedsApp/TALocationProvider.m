@@ -29,7 +29,7 @@
 
 -(void)setupLocationManager{
     locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
-    locationManager.distanceFilter = kCLLocationAccuracyHundredMeters;
+    locationManager.distanceFilter = kCLLocationAccuracyKilometer;
     locationManager.delegate = self;
     [locationManager requestAlwaysAuthorization];
     [locationManager startUpdatingLocation];

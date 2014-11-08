@@ -18,6 +18,18 @@
     CLLocationManager *locationManager;
 }
 
+NSString *const ClassName = @"Classifieds";
+NSString *const Title = @"Title";
+NSString *const Description = @"Description";
+NSString *const Price = @"Price";
+NSString *const Name = @"Name";
+NSString *const City = @"City";
+NSString *const Address = @"Address";
+NSString *const Phone = @"Phone";
+NSString *const Picture = @"Picture";
+NSString *const DateFormat = @"dd-MM-yyyy-HH-mm-ss";
+NSString *const BackgroundPicture = @"Striped_Tranquil.jpg";
+
 @synthesize scroller;
 
 - (void)viewDidLoad {
@@ -43,7 +55,7 @@
         [myAlertView show];
     }
     
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Striped_Tranquil.jpg"]];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:BackgroundPicture]];
     
     [scroller setScrollEnabled:YES];
     [scroller setContentSize:CGSizeMake(320, 1049)];
@@ -56,7 +68,7 @@
     [coder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
         CLPlacemark *mark = [placemarks lastObject];
         // NSLog(@"%@", mark.addressDictionary);
-        _txtAddress.text = mark.addressDictionary[@"City"];
+        _txtAddress.text = mark.addressDictionary[City];
     }];
     
     [locationManager pausesLocationUpdatesAutomatically];
@@ -114,13 +126,13 @@
     
 }
 
-- (PFFile *)base64String {
+- (PFFile *)convertPicture {
     NSDateFormatter *formatter;
     NSString        *dateString;
     NSMutableString *imageName;
     
     formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd-MM-yyyy-HH-mm-ss"];
+    [formatter setDateFormat:DateFormat];
     
     dateString = [formatter stringFromDate:[NSDate date]];
     imageName = [NSMutableString stringWithString:dateString];
@@ -133,6 +145,8 @@
 }
 
 - (IBAction)saveClassified:(UIButton *)sender {
+    BOOL check = [self isValid];
+    
     NSString *title = _txtTitle.text;
     NSString *description = _txtDescription.text;
     NSString *address = _txtAddress.text;
@@ -140,16 +154,39 @@
     NSString *name = _txtName.text;
     NSString *price = _txtPrice.text;
     
-    PFObject *classified = [PFObject objectWithClassName:@"Classifieds"];
-    classified[@"Title"] = title;
-    classified[@"Description"] = description;
-    classified[@"Address"] = address;
-    classified[@"Phone"] = phone;
-    classified[@"Name"] = name;
-    classified[@"Price"] = price;
-    //[classified setObject:_imageView.image forKey:@"Image"];
-    classified[@"Picture"] = self.base64String;
+    PFObject *classified = [PFObject objectWithClassName:ClassName];
+    classified[Title] = title;
+    classified[Description] = description;
+    classified[Address] = address;
+    classified[Phone] = phone;
+    classified[Name] = name;
+    classified[Price] = price;
+    classified[Picture] = [self convertPicture];
+    
     [classified saveInBackground];
+}
+
+-(BOOL) isValid{
+    if(_txtTitle.text.length < 5 || _txtTitle.text.length > 50){
+        
+        [self initTitle:@"Invalid title" throwMessage:@"Title must be between 5 and 50 letters long" useDelegate:nil btnCancel:@"Close" btnOther:nil];
+    }
+    
+    return YES;
+}
+
+-(void) initTitle:(NSString*)title
+     throwMessage:(NSString*)message
+      useDelegate:(id)delegateName
+        btnCancel:(NSString*)btnCancelTitle
+         btnOther:(NSString*)btnOtherTitle{
+    
+    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:title
+                                                          message:message
+                                                         delegate:delegateName
+                                                cancelButtonTitle:btnCancelTitle
+                                                otherButtonTitles: btnOtherTitle, nil];
+    [myAlertView show];
 }
 
 #pragma mark - Image Picker Controller delegate methods

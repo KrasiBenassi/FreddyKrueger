@@ -9,21 +9,51 @@
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
 
-
-@interface AppDelegate ()
-
+@interface AppDelegate (){
+    UIApplication *app;
+}
 @end
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    
     [Parse setApplicationId:@"dxTVScOdhW0EEjfB7oY36ydBaOeEbGgKpNEaFYI7"
                   clientKey:@"cstx4Gx4ERIdEt9AJYXMR9p2SokrOuvDVuKev5Ey"];
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     return YES;
+}
+
+- (void)application:(UIApplication *)application
+  performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+    
+    NSURL *url = [[NSURL alloc] initWithString:@"http://yourserver.com/data.json"];
+    NSURLSessionDataTask *task = [session dataTaskWithURL:url
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            
+                                            if (error) {
+                                                completionHandler(UIBackgroundFetchResultFailed);
+                                                return;
+                                            }
+                                            
+                                            // Parse response/data and determine whether new content was available
+                                            BOOL hasNewData = true;
+                                            if (hasNewData) {
+                                                completionHandler(UIBackgroundFetchResultNewData);
+                                            } else {
+                                                completionHandler(UIBackgroundFetchResultNoData);
+                                            }
+                                        }];
+    
+    // Start the task
+    [task resume];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -34,6 +64,23 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    app = [UIApplication sharedApplication];
+    
+    __block UIBackgroundTaskIdentifier bgTask = [app beginBackgroundTaskWithExpirationHandler:^{ [app endBackgroundTask:bgTask];
+        bgTask = UIBackgroundTaskInvalid;
+    }];
+    
+    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(doSomeFunction) userInfo:nil repeats:YES];
+}
+
+-(void)doSomeFunction{
+    [[[UIAlertView alloc] initWithTitle:@"Location error"
+                                message:@"In Background"
+                               delegate:nil
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil, nil]
+     show];
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

@@ -18,6 +18,19 @@
 
 @implementation TableViewController
 
+NSString *const TVClassName = @"Classifieds";
+//NSString *const TableCellIdentifier = @"TableCell";
+NSString *const ShowDetailsIdentifier = @"ShowDetails";
+NSString *const TVTitle = @"Title";
+NSString *const TVDescription = @"Description";
+NSString *const TVPrice = @"Price";
+NSString *const TVName = @"Name";
+NSString *const TVCity = @"City";
+NSString *const TVAddress = @"Address";
+NSString *const TVPhone = @"Phone";
+NSString *const TVPicture = @"Picture";
+NSString *const TVBackgroundPicture = @"Striped_Tranquil.jpg";
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -33,13 +46,13 @@
     
     [[self navigationItem] setBackBarButtonItem:newBackButton];
     
-    self.tableView.tableHeaderView = [[TableHeaderView alloc] initWithText:@"Classifieds"];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Striped_Tranquil.jpg"]];
+    self.tableView.tableHeaderView = [[TableHeaderView alloc] initWithText:TVClassName];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:TVBackgroundPicture]];
     
     _ClassifiedsArr = [[NSMutableArray alloc] init];
     _ClassifiedsInfo = [[NSMutableArray alloc] init];
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
+    PFQuery *query = [PFQuery queryWithClassName:TVClassName];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             [_ClassifiedsArr addObjectsFromArray:objects];
@@ -69,13 +82,13 @@
     
     NSInteger clCount = _ClassifiedsArr.count;
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
+    PFQuery *query = [PFQuery queryWithClassName:TVClassName];
     long count = [query countObjects];
     
     if(count != clCount && clCount != 0){
-        //_ClassifiedsArr = nil;
+        
         NSMutableArray *csArr = [[NSMutableArray alloc] init];
-        PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
+        PFQuery *query = [PFQuery queryWithClassName:TVClassName];
         [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
             if (!error) {
                 [csArr addObjectsFromArray:objects];
@@ -89,33 +102,6 @@
         }];
     }
     
-    //    PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
-    //    [query countObjectsInBackgroundWithBlock:^(int count, NSError *error) {
-    //        if (!error) {
-    //            // The count request succeeded. Log the count
-    //            NSInteger tempCount = (NSInteger) count;
-    //
-    //            if(tempCount != clCount){
-    //                clCount = tempCount;
-    ////
-    //                PFQuery *query = [PFQuery queryWithClassName:@"Classifieds"];
-    //                [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-    //                    if (!error) {
-    //                        [_ClassifiedsArr addObjectsFromArray:objects];
-    //                        [self.tableView reloadData];
-    //                        NSLog(@"SUCCESS");
-    //                    } else {
-    //                        // Log details of the failure
-    //                        NSLog(@"Error: %@ %@", error, [error userInfo]);
-    //                    }
-    //                }];
-    //            }
-    //
-    //        } else {
-    //            // The request failed
-    //        }
-    //    }];
-    
     return clCount;
 }
 
@@ -127,34 +113,33 @@
     // Configure the cell...
     long row = [indexPath row];
     
-    PFFile *userImageFile = _ClassifiedsArr[row][@"Picture"];
+    PFFile *userImageFile = _ClassifiedsArr[row][TVPicture];
     
     NSData *dataImage = [userImageFile getData];
     
     [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
         if (!error) {
             cell.thumbImage.image = [UIImage imageWithData:imageData];
-            }
+        }
     }];
     
-    cell.lblTitle.text = _ClassifiedsArr[row][@"Title"];
-    cell.lblDescription.text = _ClassifiedsArr[row][@"Description"];
-    cell.price.text = _ClassifiedsArr[row][@"Price"];
+    cell.lblTitle.text = _ClassifiedsArr[row][TVTitle];
+    cell.lblDescription.text = _ClassifiedsArr[row][TVDescription];
+    cell.price.text = _ClassifiedsArr[row][TVPrice];
     
     NSMutableDictionary *arr = [[NSMutableDictionary alloc] init];
-    arr[@"Title"] = _ClassifiedsArr[row][@"Title"];
-    arr[@"Description"] = _ClassifiedsArr[row][@"Description"];
-    arr[@"Phone"] = _ClassifiedsArr[row][@"Phone"];
-    arr[@"Name"] = _ClassifiedsArr[row][@"Name"];
-    arr[@"Address"] = _ClassifiedsArr[row][@"Address"];
-    arr[@"Picture"] = dataImage;
+    arr[TVTitle] = _ClassifiedsArr[row][TVTitle];
+    arr[TVDescription] = _ClassifiedsArr[row][TVDescription];
+    arr[TVPhone] = _ClassifiedsArr[row][TVPhone];
+    arr[TVName] = _ClassifiedsArr[row][TVName];
+    arr[TVAddress] = _ClassifiedsArr[row][TVAddress];
+    arr[TVPicture] = dataImage;
     
-    if([[_ClassifiedsArr[row] allKeys] containsObject:@"Price"])
+    if([[_ClassifiedsArr[row] allKeys] containsObject:TVPrice])
     {
-        arr[@"Price"] = _ClassifiedsArr[row][@"Price"];
-    }
-    else{
-        arr[@"Price"] = @"";
+        arr[TVPrice] = _ClassifiedsArr[row][TVPrice];
+    } else {
+        arr[TVPrice] = @"";
     }
     [_ClassifiedsInfo addObject: arr];
     
@@ -162,7 +147,7 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"ShowDetails"]) {
+    if ([[segue identifier] isEqualToString:ShowDetailsIdentifier]) {
         DetailViewController *detailViewController = [segue destinationViewController];
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         
@@ -172,47 +157,47 @@
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 /*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
