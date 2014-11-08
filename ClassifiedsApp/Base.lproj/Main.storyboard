@@ -506,6 +506,32 @@
             </objects>
             <point key="canvasLocation" x="1925" y="18"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="OWg-vv-96J">
+            <objects>
+                <tableViewController id="1CL-Xk-xXu" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="wUJ-Vz-axa">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Uf3-PN-yQR">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uf3-PN-yQR" id="U9Y-T8-kK6">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="1CL-Xk-xXu" id="fhv-xq-SyP"/>
+                            <outlet property="delegate" destination="1CL-Xk-xXu" id="RGP-oJ-BnV"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="13t-dg-11w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1909" y="666"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="tqD-O9-MD0">
             <objects>

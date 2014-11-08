@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		8410861F1A0B981400053CE8 /* Striped_Tranquil.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8410861E1A0B981400053CE8 /* Striped_Tranquil.jpg */; };
+		847DC1111A0E528D00DEED3A /* MyClassifieds.m in Sources */ = {isa = PBXBuildFile; fileRef = 847DC1101A0E528D00DEED3A /* MyClassifieds.m */; };
+		847DC1151A0E57A200DEED3A /* CDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 847DC1141A0E57A200DEED3A /* CDHelper.m */; };
+		847DC11E1A0E6F6100DEED3A /* MyClassifiedsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 847DC11D1A0E6F6100DEED3A /* MyClassifiedsController.m */; };
 		84825A031A0803D800CC7391 /* TALocationProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 84825A021A0803D700CC7391 /* TALocationProvider.m */; };
 		849AFCE41A089ACE00237B18 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849AFCDA1A089ACE00237B18 /* AudioToolbox.framework */; };
 		849AFCE51A089ACE00237B18 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849AFCDB1A089ACE00237B18 /* CFNetwork.framework */; };
@@ -51,6 +54,12 @@
 
 /* Begin PBXFileReference section */
 		8410861E1A0B981400053CE8 /* Striped_Tranquil.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Striped_Tranquil.jpg; sourceTree = "<group>"; };
+		847DC10F1A0E528D00DEED3A /* MyClassifieds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyClassifieds.h; path = ClassifiedsApp/MyClassifieds.h; sourceTree = "<group>"; };
+		847DC1101A0E528D00DEED3A /* MyClassifieds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyClassifieds.m; path = ClassifiedsApp/MyClassifieds.m; sourceTree = "<group>"; };
+		847DC1131A0E57A200DEED3A /* CDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDHelper.h; path = ClassifiedsApp/CDHelper.h; sourceTree = "<group>"; };
+		847DC1141A0E57A200DEED3A /* CDHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDHelper.m; path = ClassifiedsApp/CDHelper.m; sourceTree = "<group>"; };
+		847DC11C1A0E6F6100DEED3A /* MyClassifiedsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyClassifiedsController.h; sourceTree = "<group>"; };
+		847DC11D1A0E6F6100DEED3A /* MyClassifiedsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyClassifiedsController.m; sourceTree = "<group>"; };
 		84825A011A0803D700CC7391 /* TALocationProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TALocationProvider.h; sourceTree = "<group>"; };
 		84825A021A0803D700CC7391 /* TALocationProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TALocationProvider.m; sourceTree = "<group>"; };
 		849AFCDA1A089ACE00237B18 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -123,6 +132,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		847DC1121A0E52BB00DEED3A /* CDModels */ = {
+			isa = PBXGroup;
+			children = (
+				84A04D2E1A01BDE1007CC73D /* ClassifiedsApp.xcdatamodeld */,
+				847DC10F1A0E528D00DEED3A /* MyClassifieds.h */,
+				847DC1101A0E528D00DEED3A /* MyClassifieds.m */,
+				847DC1131A0E57A200DEED3A /* CDHelper.h */,
+				847DC1141A0E57A200DEED3A /* CDHelper.m */,
+			);
+			name = CDModels;
+			sourceTree = "<group>";
+		};
 		849AFCEE1A089B7600237B18 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +166,7 @@
 		84A04D1B1A01BDE1007CC73D = {
 			isa = PBXGroup;
 			children = (
+				847DC1121A0E52BB00DEED3A /* CDModels */,
 				84A04D261A01BDE1007CC73D /* ClassifiedsApp */,
 				849AFCEE1A089B7600237B18 /* Frameworks */,
 				84A04D431A01BDE1007CC73D /* ClassifiedsAppTests */,
@@ -171,13 +193,14 @@
 				84A02E7B1A02B6AC00894992 /* DetailViewController.h */,
 				84A02E7C1A02B6AC00894992 /* DetailViewController.m */,
 				84A04D341A01BDE1007CC73D /* Main.storyboard */,
+				847DC11C1A0E6F6100DEED3A /* MyClassifiedsController.h */,
+				847DC11D1A0E6F6100DEED3A /* MyClassifiedsController.m */,
 				84A04D5A1A01D187007CC73D /* TableCell.h */,
 				84A04D5B1A01D187007CC73D /* TableCell.m */,
 				84A04D501A01C251007CC73D /* TableViewController.h */,
 				84A04D511A01C251007CC73D /* TableViewController.m */,
 				84A04D371A01BDE1007CC73D /* Images.xcassets */,
 				84A04D391A01BDE1007CC73D /* LaunchScreen.xib */,
-				84A04D2E1A01BDE1007CC73D /* ClassifiedsApp.xcdatamodeld */,
 				84A1AC211A032567005CE5FF /* TableHeaderView.h */,
 				84A1AC221A032567005CE5FF /* TableHeaderView.m */,
 				84825A011A0803D700CC7391 /* TALocationProvider.h */,
@@ -342,7 +365,10 @@
 				84A04D5C1A01D187007CC73D /* TableCell.m in Sources */,
 				84A04D2A1A01BDE1007CC73D /* main.m in Sources */,
 				84A04D301A01BDE1007CC73D /* ClassifiedsApp.xcdatamodeld in Sources */,
+				847DC1111A0E528D00DEED3A /* MyClassifieds.m in Sources */,
 				84A04D521A01C251007CC73D /* TableViewController.m in Sources */,
+				847DC11E1A0E6F6100DEED3A /* MyClassifiedsController.m in Sources */,
+				847DC1151A0E57A200DEED3A /* CDHelper.m in Sources */,
 				84A02E7D1A02B6AC00894992 /* DetailViewController.m in Sources */,
 				84A1AC2C1A0403F8005CE5FF /* AddClassifiedViewController.m in Sources */,
 			);
@@ -567,7 +593,8 @@
 				84A04D2F1A01BDE1007CC73D /* ClassifiedsApp.xcdatamodel */,
 			);
 			currentVersion = 84A04D2F1A01BDE1007CC73D /* ClassifiedsApp.xcdatamodel */;
-			path = ClassifiedsApp.xcdatamodeld;
+			name = ClassifiedsApp.xcdatamodeld;
+			path = ClassifiedsApp/ClassifiedsApp.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
