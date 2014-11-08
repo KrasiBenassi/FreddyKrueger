@@ -7,6 +7,7 @@
 //
 
 #import "AddClassifiedViewController.h"
+#import "TableViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import <Parse/Parse.h>
 
@@ -29,6 +30,21 @@ NSString *const Phone = @"Phone";
 NSString *const Picture = @"Picture";
 NSString *const DateFormat = @"dd-MM-yyyy-HH-mm-ss";
 NSString *const BackgroundPicture = @"Striped_Tranquil.jpg";
+NSString *const errTitleForm = @"Invalid form";
+NSString *const errTitleTitle = @"Invalid Title";
+NSString *const errTitleDescription = @"Invalid Description";
+NSString *const errTitlePhone = @"Invalid Phone number";
+NSString *const errTitleAddress = @"Invalid Address name";
+NSString *const errTitleName = @"Invalid Name";
+NSString *const errTitlePrice = @"Invalid Price";
+NSString *const errMessageForm = @"All fields must not be empty";
+NSString *const errMessageTitle = @"Title must be between 5 and 50 letters long";
+NSString *const errMessageDescription = @"Description must be between 10 and 200 letters long";
+NSString *const errMessagePhone = @"Invalid phone number. \n Use only digits (no whitespace).\n Phone must be between 5 and 20 digits long";
+NSString *const errMessageAddress = @"Address must be between 2 and 20 letters long";
+NSString *const errMessageName = @"Name must be between 2 and 20 letters long";
+NSString *const errMessagePrice = @"Use only digits (no whitespace).\n If it\'s negotiable enter 0.\n Authorized price to 7 digits.";
+NSString *const btnCanselMessage = @"Close";
 
 @synthesize scroller;
 
@@ -145,31 +161,98 @@ NSString *const BackgroundPicture = @"Striped_Tranquil.jpg";
 }
 
 - (IBAction)saveClassified:(UIButton *)sender {
-    BOOL check = [self isValid];
+    BOOL isValid = [self isValidForm];
     
-    NSString *title = _txtTitle.text;
-    NSString *description = _txtDescription.text;
-    NSString *address = _txtAddress.text;
-    NSString *phone = _txtPhone.text;
-    NSString *name = _txtName.text;
-    NSString *price = _txtPrice.text;
-    
-    PFObject *classified = [PFObject objectWithClassName:ClassName];
-    classified[Title] = title;
-    classified[Description] = description;
-    classified[Address] = address;
-    classified[Phone] = phone;
-    classified[Name] = name;
-    classified[Price] = price;
-    classified[Picture] = [self convertPicture];
-    
-    [classified saveInBackground];
+    if(isValid){
+        NSString *title = _txtTitle.text;
+        NSString *description = _txtDescription.text;
+        NSString *address = _txtAddress.text;
+        NSString *phone = _txtPhone.text;
+        NSString *name = _txtName.text;
+        NSString *price = _txtPrice.text;
+        
+        PFObject *classified = [PFObject objectWithClassName:ClassName];
+        classified[Title] = title;
+        classified[Description] = description;
+        classified[Address] = address;
+        classified[Phone] = phone;
+        classified[Name] = name;
+        classified[Price] = [NSString stringWithFormat:@"$%@", price];
+        classified[Picture] = [self convertPicture];
+        
+        [classified saveInBackground];
+        
+        TableViewController *wc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]
+                                   instantiateViewControllerWithIdentifier:@"TableViewController"];
+        [self.navigationController pushViewController:wc animated:YES];
+    }
 }
 
--(BOOL) isValid{
-    if(_txtTitle.text.length < 5 || _txtTitle.text.length > 50){
-        
-        [self initTitle:@"Invalid title" throwMessage:@"Title must be between 5 and 50 letters long" useDelegate:nil btnCancel:@"Close" btnOther:nil];
+-(BOOL) isValidForm{
+    NSString *titleText = _txtTitle.text;
+    NSString *descriptionText = _txtDescription.text;
+    NSString *phoneText = _txtPhone.text;
+    NSString *nameText = _txtName.text;
+    NSString *priceText = _txtPrice.text;
+    NSString *cityText = _txtAddress.text;
+    
+    BOOL validPhone;
+    BOOL validPrice;
+    NSCharacterSet *alphaNums = [NSCharacterSet decimalDigitCharacterSet];
+    NSCharacterSet *phoneTextSet = [NSCharacterSet characterSetWithCharactersInString:phoneText];
+    NSCharacterSet *priceTextSet = [NSCharacterSet characterSetWithCharactersInString:priceText];
+    validPhone = [alphaNums isSupersetOfSet:phoneTextSet];
+    validPrice = [alphaNums isSupersetOfSet:priceTextSet];
+    
+    if(titleText.length == 0 || descriptionText.length == 0|| phoneText.length == 0 || nameText.length == 0 || priceText.length == 0 || cityText.length == 0){
+        [self initTitle:errTitleForm
+           throwMessage:errMessageForm
+            useDelegate:nil
+              btnCancel:btnCanselMessage
+               btnOther:nil];
+        return NO;
+    } else if(titleText.length < 5 || titleText.length > 50){
+        [self initTitle:errTitleTitle
+           throwMessage:errMessageTitle
+            useDelegate:nil
+              btnCancel:btnCanselMessage
+               btnOther:nil];
+        return NO;
+    } else if (descriptionText.length < 10 || descriptionText.length > 200){
+        [self initTitle:errTitleDescription
+           throwMessage:errMessageDescription
+            useDelegate:nil
+              btnCancel:btnCanselMessage
+               btnOther:nil];
+        return NO;
+    } else if(cityText.length <2 || cityText.length >20){
+        [self initTitle:errTitleAddress
+           throwMessage:errMessageAddress
+            useDelegate:nil
+              btnCancel:btnCanselMessage
+               btnOther:nil];
+        return NO;
+    } else if(!validPhone || phoneText.length < 5 || phoneText.length > 20){
+        [self initTitle:errTitlePhone
+           throwMessage:errMessagePhone
+            useDelegate:nil
+              btnCancel:btnCanselMessage
+               btnOther:nil];
+        return NO;
+    } else if (nameText.length < 2 || nameText.length > 20){
+        [self initTitle:errTitleName
+           throwMessage:errMessageName
+            useDelegate:nil
+              btnCancel:btnCanselMessage
+               btnOther:nil];
+        return NO;
+    } else if (!validPrice || priceText.length > 7){
+        [self initTitle:errTitlePrice
+           throwMessage:errMessagePrice
+            useDelegate:nil
+              btnCancel:btnCanselMessage
+               btnOther:nil];
+        return NO;
     }
     
     return YES;

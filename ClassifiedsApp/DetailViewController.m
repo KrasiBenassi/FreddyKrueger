@@ -59,7 +59,7 @@ NSString *const DVBackgroundPicture = @"Striped_Tranquil.jpg";
     _lblPhone.text = _detailModal[0][DVPhone];
     _lblName.text = _detailModal[0][DVName];
     _lblLocation.text = _detailModal[0][DVAddress];
-    
+    [_lblPrice sizeToFit];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:DVBackgroundPicture]];
     self.navigationItem.title = _detailModal[0][DVTitle];
 

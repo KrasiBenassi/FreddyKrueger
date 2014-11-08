@@ -26,27 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClassifiedsApp/AddClassifiedViewController.m"
-            timestampString = "436967643.897194"
+            timestampString = "437135808.413501"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "-saveClassified:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ClassifiedsApp/AddClassifiedViewController.m"
-            timestampString = "436959648.894772"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "13"
-            endingLineNumber = "13"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
             landmarkName = "@interface AddClassifiedViewController()"
             landmarkType = "2">
          </BreakpointContent>
@@ -58,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ClassifiedsApp/AddClassifiedViewController.m"
-            timestampString = "436960269.496038"
+            timestampString = "437135808.413501"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "@implementation AddClassifiedViewController"
             landmarkType = "3">
          </BreakpointContent>
