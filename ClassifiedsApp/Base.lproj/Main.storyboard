@@ -460,7 +460,7 @@
                         <viewControllerLayoutGuide type="top" id="2Jk-bZ-fNa"/>
                         <viewControllerLayoutGuide type="bottom" id="4RF-j8-43A"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="fvy-de-cl8">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="fvy-de-cl8">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -525,15 +525,12 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7A7-tY-nkL">
+                                    <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7A7-tY-nkL">
                                         <rect key="frame" x="0.0" y="36" width="568" height="204"/>
                                         <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="204" id="b2a-Fu-uaZ"/>
                                         </constraints>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="Mr6-ML-Q14" appends="YES" id="SHV-Z2-j78"/>
-                                        </connections>
                                     </imageView>
                                 </subviews>
                                 <constraints>
@@ -574,6 +571,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="EYq-pD-6Dk" firstAttribute="top" secondItem="2Jk-bZ-fNa" secondAttribute="bottom" constant="4" id="GZO-lQ-KjX"/>
                             <constraint firstItem="EYq-pD-6Dk" firstAttribute="top" secondItem="fvy-de-cl8" secondAttribute="topMargin" constant="4" id="HBr-sR-mT3"/>
@@ -581,6 +579,9 @@
                             <constraint firstItem="4RF-j8-43A" firstAttribute="top" secondItem="EYq-pD-6Dk" secondAttribute="bottom" constant="4" id="TVy-a7-wvQ"/>
                             <constraint firstItem="EYq-pD-6Dk" firstAttribute="trailing" secondItem="fvy-de-cl8" secondAttribute="trailingMargin" id="ayi-5a-Vnj"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="7gp-dE-JiQ" appends="YES" id="QYB-bL-tXI"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="QKY-GY-Y72"/>
                     <connections>
@@ -594,9 +595,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vT-Qf-UPT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pinchGestureRecognizer id="Mr6-ML-Q14">
+                <pinchGestureRecognizer id="7gp-dE-JiQ">
                     <connections>
-                        <action selector="handlePinch:" destination="XCg-Fz-GCk" id="1XW-Ge-GOC"/>
+                        <action selector="myPinch:" destination="XCg-Fz-GCk" id="Y69-w6-C8B"/>
                     </connections>
                 </pinchGestureRecognizer>
             </objects>

@@ -24,31 +24,6 @@ NSString *const DVPhone = @"Phone";
 NSString *const DVPicture = @"Picture";
 NSString *const DVBackgroundPicture = @"Striped_Tranquil.jpg";
 
-- (IBAction)handlePinch:(UIGestureRecognizer*)sender{
-    CGFloat lastScaleFactor = 1;
-    CGFloat factor = [(UIPinchGestureRecognizer*) sender scale];
-    
-    if(factor >1){ //zooming in
-        _imageView.transform = CGAffineTransformMakeScale(
-                                                          lastScaleFactor + (factor - 1),
-                                                          lastScaleFactor + (factor - 1)
-                                                          );
-    } else {
-        _imageView.transform = CGAffineTransformMakeScale(
-                                                         lastScaleFactor * factor,
-                                                         lastScaleFactor * factor
-                                                         );
-    }
-    
-    if(sender.state == UIGestureRecognizerStateEnded){
-        if(factor > 1){
-            lastScaleFactor += (factor -1);
-        } else {
-            lastScaleFactor *= factor;
-        }
-    }
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
      //Do any additional setup after loading the view..
@@ -70,6 +45,31 @@ NSString *const DVBackgroundPicture = @"Striped_Tranquil.jpg";
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)myPinch:(UIGestureRecognizer *)sender {
+    CGFloat lastScaleFactor = 1;
+    CGFloat factor = [(UIPinchGestureRecognizer*) sender scale];
+    
+    if(factor >1){ //zooming in
+        _imageView.transform = CGAffineTransformMakeScale(
+                                                          lastScaleFactor + (factor - 1),
+                                                          lastScaleFactor + (factor - 1)
+                                                          );
+    } else {
+        _imageView.transform = CGAffineTransformMakeScale(
+                                                          lastScaleFactor * factor,
+                                                          lastScaleFactor * factor
+                                                          );
+    }
+    
+    if(sender.state == UIGestureRecognizerStateEnded){
+        if(factor > 1){
+            lastScaleFactor += (factor -1);
+        } else {
+            lastScaleFactor *= factor;
+        }
+    }
+}
+
 /*
 #pragma mark - Navigation
 
@@ -79,4 +79,5 @@ NSString *const DVBackgroundPicture = @"Striped_Tranquil.jpg";
     // Pass the selected object to the new view controller.
 }
 */
+
 @end

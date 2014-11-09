@@ -17,8 +17,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lblPhone;
 @property (strong, nonatomic) IBOutlet UILabel *lblName;
 @property (strong, nonatomic) IBOutlet UILabel *lblLocation;
-- (IBAction)handlePinch:(UIGestureRecognizer*)sender;
-
+- (IBAction)myPinch:(UIGestureRecognizer *)sender;
 
 @property (strong, nonatomic)NSArray *detailModal;
 
