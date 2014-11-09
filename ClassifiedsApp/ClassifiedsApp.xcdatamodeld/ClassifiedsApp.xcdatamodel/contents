@@ -4,12 +4,13 @@
         <attribute name="address" attributeType="String" syncable="YES"/>
         <attribute name="descriptionText" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="picture" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="pictureName" attributeType="String" syncable="YES"/>
         <attribute name="price" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MyClassifieds" positionX="-63" positionY="-7" width="128" height="148"/>
+        <element name="MyClassifieds" positionX="-63" positionY="-7" width="128" height="165"/>
     </elements>
 </model>

@@ -14,7 +14,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *lblTitle;
 @property (nonatomic, strong) IBOutlet UILabel *lblDescription;
 @property (nonatomic, strong) IBOutlet UIImageView *thumbImage;
-@property (strong, nonatomic) IBOutlet UILabel *price;
+@property (strong, nonatomic) IBOutlet UILabel *lblPrice;
 
 
 @end

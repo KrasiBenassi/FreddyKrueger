@@ -125,7 +125,7 @@ NSString *const TVBackgroundPicture = @"Striped_Tranquil.jpg";
     
     cell.lblTitle.text = _ClassifiedsArr[row][TVTitle];
     cell.lblDescription.text = _ClassifiedsArr[row][TVDescription];
-    cell.price.text = _ClassifiedsArr[row][TVPrice];
+    cell.lblPrice.text = _ClassifiedsArr[row][TVPrice];
     
     NSMutableDictionary *arr = [[NSMutableDictionary alloc] init];
     arr[TVTitle] = _ClassifiedsArr[row][TVTitle];

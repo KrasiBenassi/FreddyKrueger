@@ -12,20 +12,27 @@
 
 NSString *storeFilename = @"CDatabase.sqlite";
 
--(id)init{
-    NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
-    
-    self = [super init];
-    if(!self){
-        return nil;
++ (id)instance {
+    static CDHelper* _instance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _instance = [[self alloc] init];
+    });
+    return _instance;
+}
+
+- (id)init {
+    if (self = [super init]) {
+        _model = [NSManagedObjectModel mergedModelFromBundles:nil];
+        _coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_model];
+        _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        [_context setPersistentStoreCoordinator: _coordinator];
     }
-    
-    _model = [NSManagedObjectModel mergedModelFromBundles:nil];
-    _coordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_model];
-    _context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [_context setPersistentStoreCoordinator: _coordinator];
-    
     return self;
+}
+
+- (void)dealloc {
+    // Should never be called, but just here for clarity really.
 }
 
 -(NSURL*) storeURL{
@@ -36,7 +43,7 @@ NSString *storeFilename = @"CDatabase.sqlite";
 
 -(void)loadStore{
     NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
-
+    
     if(_store){
         return;
     }
@@ -46,7 +53,7 @@ NSString *storeFilename = @"CDatabase.sqlite";
     
     if(!_store){
         NSLog(@"Failed to add stores. Error: %@", error);
-        abort();
+        //abort();
     } else {
         NSLog(@"Successfully added store: %@", _store);
     }
@@ -54,13 +61,13 @@ NSString *storeFilename = @"CDatabase.sqlite";
 
 -(void)setupCoreData{
     NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
-
+    
     [self loadStore];
 }
 
 -(void) saveContext{
     NSLog(@"Running %@ '%@'", self.class, NSStringFromSelector(_cmd));
-
+    
     if([_context hasChanges]){
         NSError *error = nil;
         if([_context save: &error]){

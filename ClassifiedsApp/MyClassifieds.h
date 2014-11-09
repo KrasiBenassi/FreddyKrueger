@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSString * descriptionText;
 @property (nonatomic, retain) NSData * picture;
 @property (nonatomic, retain) NSString * pictureName;
+@property (nonatomic, retain) NSString * phone;
 
 -(instancetype) initWithName: (NSString *) mcName
                      clPrice: (NSString *) mcPrice
@@ -26,6 +27,7 @@
                      clTitle: (NSString *) mcTitle
                clDescription: (NSString *) mcDescription
                    clPicture: (NSData *) mcPicture
-               clPicturename: (NSString *) mcPictureName;
+               clPicturename: (NSString *) mcPictureName
+                     clPhone: (NSString *) mcPhone;
 
 @end

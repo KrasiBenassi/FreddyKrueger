@@ -24,11 +24,11 @@
 		849AFCED1A089ACE00237B18 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849AFCE31A089ACE00237B18 /* SystemConfiguration.framework */; };
 		849AFD131A08A38D00237B18 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849AFD111A08A38D00237B18 /* Bolts.framework */; };
 		849AFD141A08A38D00237B18 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849AFD121A08A38D00237B18 /* Parse.framework */; };
+		849C8DD01A0F9386002B5D61 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 849C8DCE1A0F9386002B5D61 /* Main.storyboard */; };
 		84A02E7D1A02B6AC00894992 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A02E7C1A02B6AC00894992 /* DetailViewController.m */; };
 		84A04D2A1A01BDE1007CC73D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A04D291A01BDE1007CC73D /* main.m */; };
 		84A04D2D1A01BDE1007CC73D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A04D2C1A01BDE1007CC73D /* AppDelegate.m */; };
 		84A04D301A01BDE1007CC73D /* ClassifiedsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84A04D2E1A01BDE1007CC73D /* ClassifiedsApp.xcdatamodeld */; };
-		84A04D361A01BDE1007CC73D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A04D341A01BDE1007CC73D /* Main.storyboard */; };
 		84A04D381A01BDE1007CC73D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A04D371A01BDE1007CC73D /* Images.xcassets */; };
 		84A04D3B1A01BDE1007CC73D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84A04D391A01BDE1007CC73D /* LaunchScreen.xib */; };
 		84A04D471A01BDE1007CC73D /* ClassifiedsAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A04D461A01BDE1007CC73D /* ClassifiedsAppTests.m */; };
@@ -74,6 +74,7 @@
 		849AFCE31A089ACE00237B18 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		849AFD111A08A38D00237B18 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		849AFD121A08A38D00237B18 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		849C8DCF1A0F9386002B5D61 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84A02E7B1A02B6AC00894992 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		84A02E7C1A02B6AC00894992 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		84A04D241A01BDE1007CC73D /* ClassifiedsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClassifiedsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,7 +83,6 @@
 		84A04D2B1A01BDE1007CC73D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		84A04D2C1A01BDE1007CC73D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		84A04D2F1A01BDE1007CC73D /* ClassifiedsApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ClassifiedsApp.xcdatamodel; sourceTree = "<group>"; };
-		84A04D351A01BDE1007CC73D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84A04D371A01BDE1007CC73D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		84A04D3A1A01BDE1007CC73D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		84A04D401A01BDE1007CC73D /* ClassifiedsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClassifiedsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,7 +192,7 @@
 				84A1AC2B1A0403F8005CE5FF /* AddClassifiedViewController.m */,
 				84A02E7B1A02B6AC00894992 /* DetailViewController.h */,
 				84A02E7C1A02B6AC00894992 /* DetailViewController.m */,
-				84A04D341A01BDE1007CC73D /* Main.storyboard */,
+				849C8DCE1A0F9386002B5D61 /* Main.storyboard */,
 				847DC11C1A0E6F6100DEED3A /* MyClassifiedsController.h */,
 				847DC11D1A0E6F6100DEED3A /* MyClassifiedsController.m */,
 				84A04D5A1A01D187007CC73D /* TableCell.h */,
@@ -334,10 +334,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84A04D361A01BDE1007CC73D /* Main.storyboard in Resources */,
 				84A04D591A01CF48007CC73D /* please.jpg in Resources */,
 				84A04D571A01CF48007CC73D /* chetka.jpg in Resources */,
 				84A1AC291A033827005CE5FF /* city6.png in Resources */,
+				849C8DD01A0F9386002B5D61 /* Main.storyboard in Resources */,
 				84A04D581A01CF48007CC73D /* djanta.jpg in Resources */,
 				8410861F1A0B981400053CE8 /* Striped_Tranquil.jpg in Resources */,
 				84A04D3B1A01BDE1007CC73D /* LaunchScreen.xib in Resources */,
@@ -393,10 +393,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		84A04D341A01BDE1007CC73D /* Main.storyboard */ = {
+		849C8DCE1A0F9386002B5D61 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				84A04D351A01BDE1007CC73D /* Base */,
+				849C8DCF1A0F9386002B5D61 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

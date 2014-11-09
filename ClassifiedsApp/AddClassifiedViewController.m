@@ -11,8 +11,11 @@
 #import <CoreLocation/CoreLocation.h>
 #import <Parse/Parse.h>
 
-@interface AddClassifiedViewController ()<CLLocationManagerDelegate>
+#import "CDHelper.h"
+#import "MyClassifieds.h"
 
+@interface AddClassifiedViewController ()<CLLocationManagerDelegate>
+@property (nonatomic, strong) CDHelper *cdHelper;
 @end
 
 @implementation AddClassifiedViewController{
@@ -20,6 +23,7 @@
 }
 
 NSString *const ClassName = @"Classifieds";
+NSString *const MyClassName = @"MyClassifieds";
 NSString *const Title = @"Title";
 NSString *const Description = @"Description";
 NSString *const Price = @"Price";
@@ -111,14 +115,14 @@ NSString *const btnCanselMessage = @"Close";
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (IBAction)takePhoto:(UIButton *)sender {
     
@@ -142,7 +146,14 @@ NSString *const btnCanselMessage = @"Close";
     
 }
 
-- (PFFile *)convertPicture {
+- (PFFile *)convertPicture:(NSString*) imageName{
+    NSData *imageData = UIImageJPEGRepresentation(_imageView.image, 0.1);
+    PFFile *imageFile = [PFFile fileWithName:imageName data:imageData];
+    
+    return imageFile;
+}
+
+- (NSString*)getNameForImage{
     NSDateFormatter *formatter;
     NSString        *dateString;
     NSMutableString *imageName;
@@ -154,10 +165,7 @@ NSString *const btnCanselMessage = @"Close";
     imageName = [NSMutableString stringWithString:dateString];
     [imageName appendString:@".jpg"];
     
-    NSData *imageData = UIImageJPEGRepresentation(_imageView.image, 0.1);
-    PFFile *imageFile = [PFFile fileWithName:imageName data:imageData];
-    
-    return imageFile;
+    return imageName;
 }
 
 - (IBAction)saveClassified:(UIButton *)sender {
@@ -170,7 +178,9 @@ NSString *const btnCanselMessage = @"Close";
         NSString *phone = _txtPhone.text;
         NSString *name = _txtName.text;
         NSString *price = _txtPrice.text;
+        NSString *pictureName = [self getNameForImage];
         
+        //Uploading into Parse.com
         PFObject *classified = [PFObject objectWithClassName:ClassName];
         classified[Title] = title;
         classified[Description] = description;
@@ -178,9 +188,40 @@ NSString *const btnCanselMessage = @"Close";
         classified[Phone] = phone;
         classified[Name] = name;
         classified[Price] = [NSString stringWithFormat:@"$%@", price];
-        classified[Picture] = [self convertPicture];
+        classified[Picture] = [self convertPicture:pictureName];
         
         [classified saveInBackground];
+        
+        _cdHelper = [CDHelper instance];
+        [_cdHelper setupCoreData];
+        MyClassifieds* myClassifieds = [NSEntityDescription insertNewObjectForEntityForName:MyClassName inManagedObjectContext:_cdHelper.context];
+        
+        //Uploading into Core Data
+        NSData *imageData = UIImageJPEGRepresentation(_imageView.image, 0.1);
+        
+        myClassifieds.picture = imageData;
+        myClassifieds.title = title;
+        myClassifieds.descriptionText = description;
+        myClassifieds.address = address;
+        myClassifieds.name = name;
+        myClassifieds.price = [NSString stringWithFormat:@"$%@", price];
+        myClassifieds.phone = phone;
+        //myClassifieds.pictureName = pictureName;
+        
+        //    MyClassifieds* myClassifieds2 = [NSEntityDescription insertNewObjectForEntityForName:MCClassName inManagedObjectContext:_cdHelper.context];
+        //
+        //    //Uploading
+        //    //MyClassifieds* myClassifieds = [[MyClassifieds alloc] init];
+        //    imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"chetka.jpg"], 0.1);
+        //    //PFFile *imageFile = [PFFile fileWithName:imageName data:imageData];
+        //    myClassifieds2.picture = imageData;
+        //
+        //    myClassifieds2.address = @"3...";
+        
+        [_cdHelper.context insertObject:myClassifieds];
+        //    [_cdHelper.context insertObject:myClassifieds2];
+        
+        [self.cdHelper saveContext];
         
         TableViewController *wc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]
                                    instantiateViewControllerWithIdentifier:@"TableViewController"];

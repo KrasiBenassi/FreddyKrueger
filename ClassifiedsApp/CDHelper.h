@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSPersistentStoreCoordinator* coordinator;
 @property (nonatomic, strong) NSPersistentStore* store;
 
++(id)instance;
 -(void)saveContext;
 -(void)setupCoreData;
 @end
