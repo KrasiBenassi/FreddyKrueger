@@ -40,6 +40,7 @@
 		84A1AC231A032567005CE5FF /* TableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A1AC221A032567005CE5FF /* TableHeaderView.m */; };
 		84A1AC291A033827005CE5FF /* city6.png in Resources */ = {isa = PBXBuildFile; fileRef = 84A1AC281A033827005CE5FF /* city6.png */; };
 		84A1AC2C1A0403F8005CE5FF /* AddClassifiedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A1AC2B1A0403F8005CE5FF /* AddClassifiedViewController.m */; };
+		84EA0AD41A0FAF9600D08E8E /* shutterstock_101053759.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84EA0AD31A0FAF9600D08E8E /* shutterstock_101053759.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		84A1AC281A033827005CE5FF /* city6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = city6.png; sourceTree = "<group>"; };
 		84A1AC2A1A0403F8005CE5FF /* AddClassifiedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddClassifiedViewController.h; sourceTree = "<group>"; };
 		84A1AC2B1A0403F8005CE5FF /* AddClassifiedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddClassifiedViewController.m; sourceTree = "<group>"; };
+		84EA0AD31A0FAF9600D08E8E /* shutterstock_101053759.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = shutterstock_101053759.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 		84A04D531A01CF48007CC73D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				84EA0AD31A0FAF9600D08E8E /* shutterstock_101053759.jpg */,
 				8410861E1A0B981400053CE8 /* Striped_Tranquil.jpg */,
 				84A1AC281A033827005CE5FF /* city6.png */,
 				84A04D541A01CF48007CC73D /* chetka.jpg */,
@@ -340,6 +343,7 @@
 				849C8DD01A0F9386002B5D61 /* Main.storyboard in Resources */,
 				84A04D581A01CF48007CC73D /* djanta.jpg in Resources */,
 				8410861F1A0B981400053CE8 /* Striped_Tranquil.jpg in Resources */,
+				84EA0AD41A0FAF9600D08E8E /* shutterstock_101053759.jpg in Resources */,
 				84A04D3B1A01BDE1007CC73D /* LaunchScreen.xib in Resources */,
 				84A04D381A01BDE1007CC73D /* Images.xcassets in Resources */,
 			);
