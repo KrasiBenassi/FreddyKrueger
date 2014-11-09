@@ -206,20 +206,8 @@ NSString *const btnCanselMessage = @"Close";
         myClassifieds.name = name;
         myClassifieds.price = [NSString stringWithFormat:@"$%@", price];
         myClassifieds.phone = phone;
-        //myClassifieds.pictureName = pictureName;
-        
-        //    MyClassifieds* myClassifieds2 = [NSEntityDescription insertNewObjectForEntityForName:MCClassName inManagedObjectContext:_cdHelper.context];
-        //
-        //    //Uploading
-        //    //MyClassifieds* myClassifieds = [[MyClassifieds alloc] init];
-        //    imageData = UIImageJPEGRepresentation([UIImage imageNamed:@"chetka.jpg"], 0.1);
-        //    //PFFile *imageFile = [PFFile fileWithName:imageName data:imageData];
-        //    myClassifieds2.picture = imageData;
-        //
-        //    myClassifieds2.address = @"3...";
         
         [_cdHelper.context insertObject:myClassifieds];
-        //    [_cdHelper.context insertObject:myClassifieds2];
         
         [self.cdHelper saveContext];
         

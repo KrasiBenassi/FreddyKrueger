@@ -11,10 +11,13 @@
 
 @interface AppDelegate (){
     UIApplication *app;
+    long count;
 }
 @end
 
 @implementation AppDelegate
+
+NSString *const parseClass = @"Classifieds";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -24,6 +27,18 @@
                   clientKey:@"cstx4Gx4ERIdEt9AJYXMR9p2SokrOuvDVuKev5Ey"];
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    PFQuery *query = [PFQuery queryWithClassName:parseClass];
+    count = [query countObjects];
+
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]){
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+    }
+    UILocalNotification *notification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    
+    if(notification){
+        [application cancelAllLocalNotifications];
+    }
     
     return YES;
 }
@@ -74,12 +89,31 @@
 }
 
 -(void)doSomeFunction{
-    [[[UIAlertView alloc] initWithTitle:@"Location error"
-                                message:@"In Background"
-                               delegate:nil
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil, nil]
-     show];
+    PFQuery *query = [PFQuery queryWithClassName:parseClass];
+    long currCount = [query countObjects];
+    
+    //remove "if" body if you want to test the code inside
+    if(count != currCount){
+        UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+        localNotification.alertBody = @"New classifieds added";
+        localNotification.timeZone = [NSTimeZone localTimeZone];
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+        
+//        NSMutableArray *csArr = [[NSMutableArray alloc] init];
+//        PFQuery *query = [PFQuery queryWithClassName:TVClassName];
+//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//            if (!error) {
+//                [csArr addObjectsFromArray:objects];
+//                _ClassifiedsArr = csArr;
+//                [self.tableView reloadData];
+//                NSLog(@"SUCCESS");
+//            } else {
+//                // Log details of the failure
+//                NSLog(@"Error: %@ %@", error, [error userInfo]);
+//            }
+//        }];
+    }
+
 
 }
 
