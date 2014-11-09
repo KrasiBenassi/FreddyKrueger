@@ -70,6 +70,14 @@ NSString *const DVBackgroundPicture = @"Striped_Tranquil.jpg";
     }
 }
 
+- (IBAction)myTap:(UITapGestureRecognizer *)sender {
+    if (sender.view.contentMode == UIViewContentModeScaleAspectFit) {
+        sender.view.contentMode = UIViewContentModeCenter;
+    }else{
+        sender.view.contentMode = UIViewContentModeScaleAspectFit;
+    }
+}
+
 /*
 #pragma mark - Navigation
 
