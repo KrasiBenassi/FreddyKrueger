@@ -23,7 +23,9 @@
 
 @implementation MyClassifiedsController
 
+NSString *const MCParseClassName = @"Classifieds";
 NSString *const MCClassName = @"MyClassifieds";
+NSString *const MCLogoText = @"My Classifieds";
 //NSString *const TableCellIdentifier = @"TableCell";
 NSString *const MCShowDetailsIdentifier = @"ShowDetails";
 NSString *const MCTitle = @"title";
@@ -43,6 +45,17 @@ NSString *const CDCity = @"City";
 NSString *const CDAddress = @"Address";
 NSString *const CDPhone = @"Phone";
 NSString *const CDPicture = @"Picture";
+NSString *const AlertDeleteTitle = @"Delete classified";
+NSString *const AlertDeleteMessage = @"Are you sure you want to delete it?";
+NSString *const AlertDeletedTitle = @"Deleted";
+NSString *const AlertDeletedMessage = @"Classified succesfully deleted.";
+NSString *const AlertErrorTitle = @"Error";
+NSString *const AlertErrorMessage = @"No row selected";
+NSString *const BtnCanselText = @"Cansel";
+NSString *const BtnOKText = @"OK";
+
+
+BOOL *isAlreadyInDeleteBody;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -51,6 +64,8 @@ NSString *const CDPicture = @"Picture";
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.title = MCLogoText;
+    
     _longPressRecognizer = [[UILongPressGestureRecognizer alloc]
                                           initWithTarget:self action:@selector(longPressDelete:)];
     _longPressRecognizer.minimumPressDuration = 0.5; //seconds
@@ -69,6 +84,7 @@ NSString *const CDPicture = @"Picture";
     
     _ClassifiedsInfo = [[NSMutableArray alloc] init];
     _classifiedDetails = [[NSMutableArray alloc] init];
+    isAlreadyInDeleteBody = NO;
     
     _cdHelper = [CDHelper instance];
     [_cdHelper setupCoreData];
@@ -83,8 +99,6 @@ NSString *const CDPicture = @"Picture";
         //[_cdHelper.context deleteObject:item];
         [_ClassifiedsInfo addObject:item];
     }
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -104,26 +118,6 @@ NSString *const CDPicture = @"Picture";
     
     NSInteger clCount = _ClassifiedsInfo.count;
     
-    //    PFQuery *query = [PFQuery queryWithClassName:MCClassName];
-    //    long count = [query countObjects];
-    //
-    //    if(count != clCount && clCount != 0){
-    //
-    //        NSMutableArray *csArr = [[NSMutableArray alloc] init];
-    //        PFQuery *query = [PFQuery queryWithClassName:MCClassName];
-    //        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-    //            if (!error) {
-    //                [csArr addObjectsFromArray:objects];
-    //                _ClassifiedsArr = csArr;
-    //                //[self.tableView reloadData];
-    //                NSLog(@"SUCCESS");
-    //            } else {
-    //                // Log details of the failure
-    //                NSLog(@"Error: %@ %@", error, [error userInfo]);
-    //            }
-    //        }];
-    //    }
-    
     return clCount;
 }
 
@@ -138,16 +132,16 @@ NSString *const CDPicture = @"Picture";
     }
     
     cell.thumbImage.image = [UIImage imageWithData:[_ClassifiedsInfo[row] picture]];
-    cell.lblTitle.text = [_ClassifiedsInfo[row] title];//_ClassifiedsArr[row][MCTitle];
-    cell.lblDescription.text = [_ClassifiedsInfo[row] descriptionText];//_ClassifiedsArr[row][MCDescription];
-    cell.lblPrice.text = [_ClassifiedsInfo[row] price];//_ClassifiedsArr[row][MCPrice];
+    cell.lblTitle.text = [_ClassifiedsInfo[row] title];
+    cell.lblDescription.text = [_ClassifiedsInfo[row] descriptionText];
+    cell.lblPrice.text = [_ClassifiedsInfo[row] price];
     
     NSMutableDictionary *arr = [[NSMutableDictionary alloc] init];
-    arr[CDTitle] = [_ClassifiedsInfo[row] title];//_ClassifiedsArr[row][MCTitle];
-    arr[CDDescription] = [_ClassifiedsInfo[row] descriptionText];//_ClassifiedsArr[row][MCDescription];
-    //arr[CDPhone] = _ClassifiedsInfo[row][MCPhone];//_ClassifiedsArr[row][MCPhone];
-    arr[CDName] = [_ClassifiedsInfo[row] name];//_ClassifiedsArr[row][MCName];
-    arr[CDAddress] = [_ClassifiedsInfo[row] address];//_ClassifiedsArr[row][MCAddress];
+    arr[CDTitle] = [_ClassifiedsInfo[row] title];
+    arr[CDDescription] = [_ClassifiedsInfo[row] descriptionText];
+    
+    arr[CDName] = [_ClassifiedsInfo[row] name];
+    arr[CDAddress] = [_ClassifiedsInfo[row] address];
     arr[CDPicture] = [_ClassifiedsInfo[row]picture];
     arr[CDPhone] = [_ClassifiedsInfo[row] phone];
     arr[CDPrice] = [_ClassifiedsInfo[row] price];
@@ -158,22 +152,28 @@ NSString *const CDPicture = @"Picture";
 }
 
 - (IBAction)longPressDelete:(id)sender {
-    CGPoint p = [_longPressRecognizer locationInView:self.tableView];
-    _indexPathForDelete = [self.tableView indexPathForRowAtPoint:p];
-    
-    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Delete classified"
-                                                          message:@"Are you sure you want to delete it?"
-                                                         delegate:self
-                                                cancelButtonTitle:@"Cancel"
-                                                otherButtonTitles: @"OK", nil];
-    [myAlertView show];
+    if(!isAlreadyInDeleteBody){
+        CGPoint p = [_longPressRecognizer locationInView:self.tableView];
+        _indexPathForDelete = [self.tableView indexPathForRowAtPoint:p];
+    } else {
+       [self initTitle:AlertDeleteTitle
+          throwMessage:AlertDeleteMessage
+           useDelegate:self
+             btnCancel:BtnCanselText
+              btnOther:BtnOKText];
+    }
+    isAlreadyInDeleteBody = YES;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1)
     {
         if (_indexPathForDelete == nil) {
-            NSLog(@"long press on table view but not on a row");
+            [self initTitle:AlertErrorTitle
+               throwMessage:AlertErrorMessage
+                useDelegate:self
+                  btnCancel:BtnOKText
+                   btnOther:nil];
         } else {
 
             NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:MCClassName];
@@ -185,23 +185,42 @@ NSString *const CDPicture = @"Picture";
             [_cdHelper.context deleteObject:fetchedObjects[row]];
             
             //Delete from parse.com
-            PFObject *object = [PFObject objectWithoutDataWithClassName:@"Classifieds"
+            PFObject *object = [PFObject objectWithoutDataWithClassName:MCParseClassName
                                                                objectId:[fetchedObjects[row] classifiedId]];
             [object deleteEventually];
             
             //Delete from array
             [_classifiedDetails removeObject:fetchedObjects[row]];
+            [_ClassifiedsInfo removeObject:fetchedObjects[row]];
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Deleted" message:@"Classified successfully deleted" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
+            [self initTitle:AlertDeletedTitle
+               throwMessage:AlertDeletedMessage
+                useDelegate:nil
+                  btnCancel:BtnCanselText
+                   btnOther:BtnOKText];
             
             [self.tableView reloadData];
         }
     }
     else
     {
-        NSLog(@"cancel");
+        NSLog(@"Cancel");
     }
+    isAlreadyInDeleteBody = NO;
+}
+
+-(void) initTitle:(NSString*)title
+     throwMessage:(NSString*)message
+      useDelegate:(id)delegateName
+        btnCancel:(NSString*)btnCancelTitle
+         btnOther:(NSString*)btnOtherTitle{
+    
+    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:title
+                                                          message:message
+                                                         delegate:delegateName
+                                                cancelButtonTitle:btnCancelTitle
+                                                otherButtonTitles: btnOtherTitle, nil];
+    [myAlertView show];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

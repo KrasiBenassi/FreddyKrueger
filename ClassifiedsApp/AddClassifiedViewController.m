@@ -23,6 +23,7 @@
 }
 
 NSString *const ClassName = @"Classifieds";
+NSString *const LogoText = @"Add Classified";
 NSString *const MyClassName = @"MyClassifieds";
 NSString *const Title = @"Title";
 NSString *const Description = @"Description";
@@ -34,27 +35,31 @@ NSString *const Phone = @"Phone";
 NSString *const Picture = @"Picture";
 NSString *const DateFormat = @"dd-MM-yyyy-HH-mm-ss";
 NSString *const BackgroundPicture = @"Striped_Tranquil.jpg";
-NSString *const errTitleForm = @"Invalid form";
-NSString *const errTitleTitle = @"Invalid Title";
-NSString *const errTitleDescription = @"Invalid Description";
-NSString *const errTitlePhone = @"Invalid Phone number";
-NSString *const errTitleAddress = @"Invalid Address name";
-NSString *const errTitleName = @"Invalid Name";
-NSString *const errTitlePrice = @"Invalid Price";
-NSString *const errMessageForm = @"All fields must not be empty";
-NSString *const errMessageTitle = @"Title must be between 5 and 50 letters long";
-NSString *const errMessageDescription = @"Description must be between 10 and 200 letters long";
-NSString *const errMessagePhone = @"Invalid phone number. \n Use only digits (no whitespace).\n Phone must be between 5 and 20 digits long";
-NSString *const errMessageAddress = @"Address must be between 2 and 20 letters long";
-NSString *const errMessageName = @"Name must be between 2 and 20 letters long";
-NSString *const errMessagePrice = @"Use only digits (no whitespace).\n If it\'s negotiable enter 0.\n Authorized price to 7 digits.";
-NSString *const btnCanselMessage = @"Close";
+NSString *const ErrTitleForm = @"Invalid form";
+NSString *const ErrTitleTitle = @"Invalid Title";
+NSString *const ErrTitleDescription = @"Invalid Description";
+NSString *const ErrTitlePhone = @"Invalid Phone number";
+NSString *const ErrTitleAddress = @"Invalid Address name";
+NSString *const ErrTitleName = @"Invalid Name";
+NSString *const ErrTitlePrice = @"Invalid Price";
+NSString *const ErrMessageForm = @"All fields must not be empty";
+NSString *const ErrMessageTitle = @"Title must be between 5 and 50 letters long";
+NSString *const ErrMessageDescription = @"Description must be between 10 and 200 letters long";
+NSString *const ErrMessagePhone = @"Invalid phone number. \n Use only digits (no whitespace).\n Phone must be between 5 and 20 digits long";
+NSString *const ErrMessageAddress = @"Address must be between 2 and 20 letters long";
+NSString *const ErrMessageName = @"Name must be between 2 and 20 letters long";
+NSString *const ErrMessagePrice = @"Use only digits (no whitespace).\n If it\'s negotiable enter 0.\n Authorized price to 7 digits.";
+NSString *const BtnCanselMessage = @"Close";
+NSString *const ErrorCameraTitle = @"Error Camera";
+NSString *const ErrorCameraMessage = @"Device has no camera!";
+NSString *const ErrorLocationTitle = @"Location error";
 
 @synthesize scroller;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationItem.title = LogoText;
     
     locationManager = [[CLLocationManager alloc] init];
     locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters;
@@ -66,10 +71,10 @@ NSString *const btnCanselMessage = @"Close";
     
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
-        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                              message:@"Device has no camera"
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:ErrorCameraTitle
+                                                              message:ErrorCameraMessage
                                                              delegate:nil
-                                                    cancelButtonTitle:@"OK"
+                                                    cancelButtonTitle:BtnCanselMessage
                                                     otherButtonTitles: nil, nil];
         
         [myAlertView show];
@@ -95,10 +100,10 @@ NSString *const btnCanselMessage = @"Close";
 }
 
 -(void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
-    [[[UIAlertView alloc] initWithTitle:@"Location error"
+    [[[UIAlertView alloc] initWithTitle:ErrorLocationTitle
                                 message:[NSString stringWithFormat:@"Error: %@", error]
                                delegate:nil
-                      cancelButtonTitle:@"OK"
+                      cancelButtonTitle:BtnCanselMessage
                       otherButtonTitles:nil, nil]
      show];
 }
@@ -235,52 +240,52 @@ NSString *const btnCanselMessage = @"Close";
     validPrice = [alphaNums isSupersetOfSet:priceTextSet];
     
     if(titleText.length == 0 || descriptionText.length == 0|| phoneText.length == 0 || nameText.length == 0 || priceText.length == 0 || cityText.length == 0){
-        [self initTitle:errTitleForm
-           throwMessage:errMessageForm
+        [self initTitle:ErrTitleForm
+           throwMessage:ErrMessageForm
             useDelegate:nil
-              btnCancel:btnCanselMessage
+              btnCancel:BtnCanselMessage
                btnOther:nil];
         return NO;
     } else if(titleText.length < 5 || titleText.length > 50){
-        [self initTitle:errTitleTitle
-           throwMessage:errMessageTitle
+        [self initTitle:ErrTitleTitle
+           throwMessage:ErrMessageTitle
             useDelegate:nil
-              btnCancel:btnCanselMessage
+              btnCancel:BtnCanselMessage
                btnOther:nil];
         return NO;
     } else if (descriptionText.length < 10 || descriptionText.length > 200){
-        [self initTitle:errTitleDescription
-           throwMessage:errMessageDescription
+        [self initTitle:ErrTitleDescription
+           throwMessage:ErrMessageDescription
             useDelegate:nil
-              btnCancel:btnCanselMessage
+              btnCancel:BtnCanselMessage
                btnOther:nil];
         return NO;
     } else if(cityText.length <2 || cityText.length >20){
-        [self initTitle:errTitleAddress
-           throwMessage:errMessageAddress
+        [self initTitle:ErrTitleAddress
+           throwMessage:ErrMessageAddress
             useDelegate:nil
-              btnCancel:btnCanselMessage
+              btnCancel:BtnCanselMessage
                btnOther:nil];
         return NO;
     } else if(!validPhone || phoneText.length < 5 || phoneText.length > 20){
-        [self initTitle:errTitlePhone
-           throwMessage:errMessagePhone
+        [self initTitle:ErrTitlePhone
+           throwMessage:ErrMessagePhone
             useDelegate:nil
-              btnCancel:btnCanselMessage
+              btnCancel:BtnCanselMessage
                btnOther:nil];
         return NO;
     } else if (nameText.length < 2 || nameText.length > 20){
-        [self initTitle:errTitleName
-           throwMessage:errMessageName
+        [self initTitle:ErrTitleName
+           throwMessage:ErrMessageName
             useDelegate:nil
-              btnCancel:btnCanselMessage
+              btnCancel:BtnCanselMessage
                btnOther:nil];
         return NO;
     } else if (!validPrice || priceText.length > 7){
-        [self initTitle:errTitlePrice
-           throwMessage:errMessagePrice
+        [self initTitle:ErrTitlePrice
+           throwMessage:ErrMessagePrice
             useDelegate:nil
-              btnCancel:btnCanselMessage
+              btnCancel:BtnCanselMessage
                btnOther:nil];
         return NO;
     }

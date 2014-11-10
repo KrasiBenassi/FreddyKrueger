@@ -17,14 +17,17 @@
 
 @implementation AppDelegate
 
+NSString *const URLForCheck = @"http://www.google.com";
 NSString *const parseClass = @"Classifieds";
+NSString *const appID = @"dxTVScOdhW0EEjfB7oY36ydBaOeEbGgKpNEaFYI7";
+NSString *const clKey = @"cstx4Gx4ERIdEt9AJYXMR9p2SokrOuvDVuKev5Ey";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
-    [Parse setApplicationId:@"dxTVScOdhW0EEjfB7oY36ydBaOeEbGgKpNEaFYI7"
-                  clientKey:@"cstx4Gx4ERIdEt9AJYXMR9p2SokrOuvDVuKev5Ey"];
+    [Parse setApplicationId:appID
+                  clientKey:clKey];
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
@@ -40,36 +43,57 @@ NSString *const parseClass = @"Classifieds";
         [application cancelAllLocalNotifications];
     }
     
+    if(![self connectedToInternet]){
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Internet error!"
+                                                              message:@"Lost internet connection!"
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"Close"
+                                                    otherButtonTitles: nil, nil];
+        [myAlertView show];
+        
+    }
+    
     return YES;
 }
 
-- (void)application:(UIApplication *)application
-  performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+- (BOOL)connectedToInternet
 {
-    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+    NSURL *url=[NSURL URLWithString:URLForCheck];
+    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
+    [request setHTTPMethod:@"HEAD"];
+    NSHTTPURLResponse *response;
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error: NULL];
     
-    NSURL *url = [[NSURL alloc] initWithString:@"http://yourserver.com/data.json"];
-    NSURLSessionDataTask *task = [session dataTaskWithURL:url
-                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                            
-                                            if (error) {
-                                                completionHandler(UIBackgroundFetchResultFailed);
-                                                return;
-                                            }
-                                            
-                                            // Parse response/data and determine whether new content was available
-                                            BOOL hasNewData = true;
-                                            if (hasNewData) {
-                                                completionHandler(UIBackgroundFetchResultNewData);
-                                            } else {
-                                                completionHandler(UIBackgroundFetchResultNoData);
-                                            }
-                                        }];
-    
-    // Start the task
-    [task resume];
+    return ([response statusCode]==200)?YES:NO;
 }
+
+//- (void)application:(UIApplication *)application
+//  performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+//{
+//    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfiguration];
+//    
+//    NSURL *url = [[NSURL alloc] initWithString:@"http://yourserver.com/data.json"];
+//    NSURLSessionDataTask *task = [session dataTaskWithURL:url
+//                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//                                            
+//                                            if (error) {
+//                                                completionHandler(UIBackgroundFetchResultFailed);
+//                                                return;
+//                                            }
+//                                            
+//                                            // Parse response/data and determine whether new content was available
+//                                            BOOL hasNewData = true;
+//                                            if (hasNewData) {
+//                                                completionHandler(UIBackgroundFetchResultNewData);
+//                                            } else {
+//                                                completionHandler(UIBackgroundFetchResultNoData);
+//                                            }
+//                                        }];
+//    
+//    // Start the task
+//    [task resume];
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -98,20 +122,6 @@ NSString *const parseClass = @"Classifieds";
         localNotification.alertBody = @"New classifieds added";
         localNotification.timeZone = [NSTimeZone localTimeZone];
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-        
-//        NSMutableArray *csArr = [[NSMutableArray alloc] init];
-//        PFQuery *query = [PFQuery queryWithClassName:TVClassName];
-//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-//            if (!error) {
-//                [csArr addObjectsFromArray:objects];
-//                _ClassifiedsArr = csArr;
-//                [self.tableView reloadData];
-//                NSLog(@"SUCCESS");
-//            } else {
-//                // Log details of the failure
-//                NSLog(@"Error: %@ %@", error, [error userInfo]);
-//            }
-//        }];
     }
 
 
