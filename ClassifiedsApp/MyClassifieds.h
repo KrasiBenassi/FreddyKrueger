@@ -13,7 +13,7 @@
 @interface MyClassifieds : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * price;
+@property (nonatomic, retain) NSString * priceValue;
 @property (nonatomic, retain) NSString * address;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * descriptionText;

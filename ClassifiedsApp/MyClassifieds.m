@@ -24,7 +24,7 @@
     self = [super init];
     if(self){
         self.name = mcName;
-        self.price = mcPrice;
+        self.priceValue = mcPrice;
         self.address = mcAddress;
         self.title = mcTitle;
         self.descriptionText = mcDescription;
@@ -38,7 +38,7 @@
 }
 
 @dynamic name;
-@dynamic price;
+@dynamic priceValue;
 @dynamic address;
 @dynamic title;
 @dynamic descriptionText;

@@ -55,7 +55,7 @@ NSString *const BtnCanselText = @"Cansel";
 NSString *const BtnOKText = @"OK";
 
 
-BOOL *isAlreadyInDeleteBody;
+BOOL isAlreadyInDeleteBody;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -134,7 +134,7 @@ BOOL *isAlreadyInDeleteBody;
     cell.thumbImage.image = [UIImage imageWithData:[_ClassifiedsInfo[row] picture]];
     cell.lblTitle.text = [_ClassifiedsInfo[row] title];
     cell.lblDescription.text = [_ClassifiedsInfo[row] descriptionText];
-    cell.lblPrice.text = [_ClassifiedsInfo[row] price];
+    cell.lblPrice.text = [_ClassifiedsInfo[row] priceValue];
     
     NSMutableDictionary *arr = [[NSMutableDictionary alloc] init];
     arr[CDTitle] = [_ClassifiedsInfo[row] title];
@@ -144,7 +144,7 @@ BOOL *isAlreadyInDeleteBody;
     arr[CDAddress] = [_ClassifiedsInfo[row] address];
     arr[CDPicture] = [_ClassifiedsInfo[row]picture];
     arr[CDPhone] = [_ClassifiedsInfo[row] phone];
-    arr[CDPrice] = [_ClassifiedsInfo[row] price];
+    arr[CDPrice] = [_ClassifiedsInfo[row] priceValue];
     [_classifiedDetails addObject: arr];
     
     return cell;
@@ -196,8 +196,8 @@ BOOL *isAlreadyInDeleteBody;
             [self initTitle:AlertDeletedTitle
                throwMessage:AlertDeletedMessage
                 useDelegate:nil
-                  btnCancel:BtnCanselText
-                   btnOther:BtnOKText];
+                  btnCancel:BtnOKText
+                   btnOther:nil];
             
             [self.tableView reloadData];
         }

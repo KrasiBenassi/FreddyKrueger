@@ -130,13 +130,23 @@ NSString *const ErrorLocationTitle = @"Location error";
  */
 
 - (IBAction)takePhoto:(UIButton *)sender {
-    
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    
-    [self presentViewController:picker animated:YES completion:NULL];
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        
+        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:ErrorCameraTitle
+                                                              message:ErrorCameraMessage
+                                                             delegate:nil
+                                                    cancelButtonTitle:BtnCanselMessage
+                                                    otherButtonTitles: nil, nil];
+        
+        [myAlertView show];
+    } else {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
     
 }
 
@@ -209,7 +219,7 @@ NSString *const ErrorLocationTitle = @"Location error";
         myClassifieds.descriptionText = description;
         myClassifieds.address = address;
         myClassifieds.name = name;
-        myClassifieds.price = [NSString stringWithFormat:@"$%@", price];
+        myClassifieds.priceValue = [NSString stringWithFormat:@"$%@", price];
         myClassifieds.phone = phone;
         myClassifieds.classifiedId = [classified objectId];
         
