@@ -18,7 +18,8 @@
                clDescription: (NSString *) mcDescription
                    clPicture: (NSData *) mcPicture
                clPicturename: (NSString *) mcPictureName
-                     clPhone:(NSString *)mcPhone
+                     clPhone: (NSString *)mcPhone
+                        clId: (NSString *)mcId
 {
     self = [super init];
     if(self){
@@ -30,6 +31,7 @@
         self.picture = mcPicture;
         self.pictureName = mcPictureName;
         self.phone = mcPhone;
+        self.classifiedId = mcId;
     }
     
     return self;
@@ -43,5 +45,6 @@
 @dynamic picture;
 @dynamic pictureName;
 @dynamic phone;
+@dynamic classifiedId;
 
 @end

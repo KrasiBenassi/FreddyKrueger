@@ -14,6 +14,8 @@
 @property (nonatomic, strong)NSMutableArray *Descriptions;
 @property (nonatomic, strong)NSMutableArray *Prices;
 
+- (IBAction)longPressDelete:(id)sender;
+@property (strong, nonatomic) IBOutlet UILongPressGestureRecognizer *longPressRecognizer;
 @property (nonatomic, strong)NSArray *ClassifiedsArr;
 @property (nonatomic, strong)NSMutableArray *ClassifiedsInfo;
 @end

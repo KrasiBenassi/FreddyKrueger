@@ -190,7 +190,7 @@ NSString *const btnCanselMessage = @"Close";
         classified[Price] = [NSString stringWithFormat:@"$%@", price];
         classified[Picture] = [self convertPicture:pictureName];
         
-        [classified saveInBackground];
+        [classified save];
         
         _cdHelper = [CDHelper instance];
         [_cdHelper setupCoreData];
@@ -206,6 +206,7 @@ NSString *const btnCanselMessage = @"Close";
         myClassifieds.name = name;
         myClassifieds.price = [NSString stringWithFormat:@"$%@", price];
         myClassifieds.phone = phone;
+        myClassifieds.classifiedId = [classified objectId];
         
         [_cdHelper.context insertObject:myClassifieds];
         

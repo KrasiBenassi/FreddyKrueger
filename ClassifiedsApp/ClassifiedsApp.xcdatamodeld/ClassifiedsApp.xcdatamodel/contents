@@ -2,6 +2,7 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="13F34" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="MyClassifieds" representedClassName="MyClassifieds" syncable="YES">
         <attribute name="address" attributeType="String" syncable="YES"/>
+        <attribute name="classifiedId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="descriptionText" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
@@ -11,6 +12,6 @@
         <attribute name="title" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="MyClassifieds" positionX="-63" positionY="-7" width="128" height="165"/>
+        <element name="MyClassifieds" positionX="-63" positionY="-7" width="128" height="180"/>
     </elements>
 </model>

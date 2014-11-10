@@ -678,11 +678,13 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.04618280105" green="0.14181368529999999" blue="0.225386639" alpha="1" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="lblDescription" destination="7LA-JI-J6u" id="Hp1-U5-1zb"/>
                                     <outlet property="lblPrice" destination="Ohs-gv-Dn1" id="iZ3-U4-ovp"/>
                                     <outlet property="lblTitle" destination="VZU-tW-EgC" id="J8X-HP-cwH"/>
                                     <outlet property="thumbImage" destination="37z-oY-k68" id="bhv-Oj-e2C"/>
+                                    <outletCollection property="gestureRecognizers" destination="FR3-2k-x2f" appends="YES" id="C78-Ps-5AE"/>
                                     <segue destination="XCg-Fz-GCk" kind="show" identifier="ShowDetails" id="52f-QZ-4pA"/>
                                 </connections>
                             </tableViewCell>
@@ -692,8 +694,16 @@
                             <outlet property="delegate" destination="1CL-Xk-xXu" id="RGP-oJ-BnV"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <outlet property="longPressRecognizer" destination="FR3-2k-x2f" id="75H-xv-hPf"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="13t-dg-11w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="FR3-2k-x2f">
+                    <connections>
+                        <action selector="longPressDelete:" destination="1CL-Xk-xXu" id="6Cb-qb-C4b"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1855" y="759"/>
         </scene>

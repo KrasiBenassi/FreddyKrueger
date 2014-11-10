@@ -18,6 +18,7 @@
 @interface MyClassifiedsController ()
 @property (nonatomic, strong) CDHelper *cdHelper;
 @property (nonatomic, strong) NSMutableArray *classifiedDetails;
+@property (nonatomic, strong) NSIndexPath *indexPathForDelete;
 @end
 
 @implementation MyClassifiedsController
@@ -50,7 +51,14 @@ NSString *const CDPicture = @"Picture";
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    //self.tableView.separatorColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5];
+    _longPressRecognizer = [[UILongPressGestureRecognizer alloc]
+                                          initWithTarget:self action:@selector(longPressDelete:)];
+    _longPressRecognizer.minimumPressDuration = 0.5; //seconds
+    _longPressRecognizer.delegate = self;
+    [self.tableView addGestureRecognizer:_longPressRecognizer];
+    //[_longPressRecognizer release];
+    
+    self.tableView.separatorColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.5];
     
     UIBarButtonItem *newBackButton = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
@@ -129,20 +137,6 @@ NSString *const CDPicture = @"Picture";
         return cell;
     }
     
-    //NSData *dataImage;
-    //for (MyClassifieds *item in _ClassifiedsArr) {
-    //    NSLog(@"%@",[_ClassifiedsArr[row] picture]);
-    //dataImage = item.picture;
-    //};
-    
-    //PFFile *userImageFile = _ClassifiedsArr[row][MCPicture];
-    
-    
-    //    [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
-    //        if (!error) {
-    //            cell.thumbImage.image = [UIImage imageWithData:imageData];
-    //        }
-    //    }];
     cell.thumbImage.image = [UIImage imageWithData:[_ClassifiedsInfo[row] picture]];
     cell.lblTitle.text = [_ClassifiedsInfo[row] title];//_ClassifiedsArr[row][MCTitle];
     cell.lblDescription.text = [_ClassifiedsInfo[row] descriptionText];//_ClassifiedsArr[row][MCDescription];
@@ -156,16 +150,58 @@ NSString *const CDPicture = @"Picture";
     arr[CDAddress] = [_ClassifiedsInfo[row] address];//_ClassifiedsArr[row][MCAddress];
     arr[CDPicture] = [_ClassifiedsInfo[row]picture];
     arr[CDPhone] = [_ClassifiedsInfo[row] phone];
-//    if([[_ClassifiedsInfo[row] allKeys] containsObject:@"price"])
-//    {
-        arr[CDPrice] = [_ClassifiedsInfo[row] price];
-//    } else {
-//        arr[CDPrice] = @"";
-//    }
-       [_classifiedDetails addObject: arr];
+    arr[CDPrice] = [_ClassifiedsInfo[row] price];
+    [_classifiedDetails addObject: arr];
     
     return cell;
     
+}
+
+- (IBAction)longPressDelete:(id)sender {
+    CGPoint p = [_longPressRecognizer locationInView:self.tableView];
+    _indexPathForDelete = [self.tableView indexPathForRowAtPoint:p];
+    
+    UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Delete classified"
+                                                          message:@"Are you sure you want to delete it?"
+                                                         delegate:self
+                                                cancelButtonTitle:@"Cancel"
+                                                otherButtonTitles: @"OK", nil];
+    [myAlertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1)
+    {
+        if (_indexPathForDelete == nil) {
+            NSLog(@"long press on table view but not on a row");
+        } else {
+
+            NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:MCClassName];
+            NSArray *fetchedObjects =[_cdHelper.context executeFetchRequest:request error:nil];
+            
+            long row = [_indexPathForDelete row];
+            
+            //delete from Core Data
+            [_cdHelper.context deleteObject:fetchedObjects[row]];
+            
+            //Delete from parse.com
+            PFObject *object = [PFObject objectWithoutDataWithClassName:@"Classifieds"
+                                                               objectId:[fetchedObjects[row] classifiedId]];
+            [object deleteEventually];
+            
+            //Delete from array
+            [_classifiedDetails removeObject:fetchedObjects[row]];
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Deleted" message:@"Classified successfully deleted" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            
+            [self.tableView reloadData];
+        }
+    }
+    else
+    {
+        NSLog(@"cancel");
+    }
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -220,5 +256,4 @@ NSString *const CDPicture = @"Picture";
  // Pass the selected object to the new view controller.
  }
  */
-
 @end
