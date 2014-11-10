@@ -587,7 +587,9 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="VZU-tW-EgC" secondAttribute="trailing" constant="-22" id="1aF-40-U8H"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="VZU-tW-EgC" secondAttribute="bottom" constant="56" id="4Wk-3y-zy8"/>
                                         <constraint firstItem="37z-oY-k68" firstAttribute="leading" secondItem="trs-PZ-05r" secondAttribute="leadingMargin" constant="10" id="7Su-dc-Jy6"/>
+                                        <constraint firstItem="37z-oY-k68" firstAttribute="centerY" secondItem="trs-PZ-05r" secondAttribute="centerY" id="80c-o4-61w"/>
                                         <constraint firstItem="Ohs-gv-Dn1" firstAttribute="baseline" secondItem="7LA-JI-J6u" secondAttribute="baseline" id="8PC-Of-ktq"/>
                                         <constraint firstItem="VZU-tW-EgC" firstAttribute="leading" secondItem="37z-oY-k68" secondAttribute="trailing" constant="13" id="D4i-Ts-1Gm"/>
                                         <constraint firstItem="7LA-JI-J6u" firstAttribute="trailing" secondItem="VZU-tW-EgC" secondAttribute="trailing" id="NFq-hd-9pZ"/>
@@ -602,6 +604,7 @@
                                         <constraint firstItem="37z-oY-k68" firstAttribute="top" secondItem="trs-PZ-05r" secondAttribute="topMargin" constant="8" id="hEE-pQ-8gP"/>
                                         <constraint firstItem="37z-oY-k68" firstAttribute="top" secondItem="VZU-tW-EgC" secondAttribute="top" id="iPk-Ri-3Bm"/>
                                         <constraint firstItem="VZU-tW-EgC" firstAttribute="leading" secondItem="7LA-JI-J6u" secondAttribute="leading" id="lNW-1r-Twb"/>
+                                        <constraint firstItem="7LA-JI-J6u" firstAttribute="top" secondItem="trs-PZ-05r" secondAttribute="topMargin" constant="35" id="zRh-pI-2xP"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.04618280105" green="0.14181368529999999" blue="0.225386639" alpha="1" colorSpace="calibratedRGB"/>

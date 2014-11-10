@@ -71,12 +71,15 @@ NSString *const DVBackgroundPicture = @"Striped_Tranquil.jpg";
 }
 
 - (IBAction)myTap:(UITapGestureRecognizer *)sender {
-    if (sender.view.contentMode == UIViewContentModeScaleAspectFit) {
-        sender.view.contentMode = UIViewContentModeCenter;
-    }else{
-        sender.view.contentMode = UIViewContentModeScaleAspectFit;
-    }
-}
+    CGFloat height = _imageView.frame.size.height;
+    CGFloat width = _imageView.frame.size.width;
+    _imageView.transform = CGAffineTransformMakeScale(height/204, width/568);
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        // animate it to the identity transform (100% scale)
+        _imageView.transform = CGAffineTransformIdentity;
+    } completion:^(BOOL finished){
+        // if you want to do something once the animation finishes, put it here
+    }];}
 
 /*
 #pragma mark - Navigation
